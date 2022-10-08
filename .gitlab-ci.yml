@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+build veebiprojekt-frontend:
+  stage: build
+  only:
+    refs:
+      - master
+  tags:
+    - frontend
+  script:
+    - ./mvnw package
+    - docker build -t veebiprojekt-frontend
+
+deploy veebiprojekt-frontend:
+  stage: deploy
+  only:
+    refs:
+      - master
+  tags:
+    - frontend
+  script:
+    - cd /opt/web-project/frontend
+    - docker-compose down
+    - docker-compose up -d
