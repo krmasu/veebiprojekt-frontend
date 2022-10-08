@@ -10,6 +10,7 @@ build veebiprojekt-frontend:
   tags:
     - frontend
   script:
+    - cd /
     - docker build -t veebiprojekt-frontend
 
 deploy veebiprojekt-frontend:
