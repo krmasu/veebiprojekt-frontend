@@ -10,7 +10,6 @@ build veebiprojekt-frontend:
   tags:
     - frontend
   script:
-    - ./mvnw package
     - docker build -t veebiprojekt-frontend
 
 deploy veebiprojekt-frontend:
