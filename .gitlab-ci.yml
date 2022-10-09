@@ -10,7 +10,7 @@ build veebiprojekt-frontend:
   tags:
     - frontend-runner
   script:
-    - docker build -t veebiprojekt-frontend
+    - docker build -t veebiprojekt-frontend .
 
 deploy veebiprojekt-frontend:
   stage: deploy
