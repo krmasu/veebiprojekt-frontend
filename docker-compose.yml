@@ -2,6 +2,6 @@ version: "3.7"
 services:
     web-project-frontend:
         image: veebiprojekt-frontend:latest
-        container_name: veebiprojekt-frontend
+        container_name: veebiprojekt-frontend123
         ports:
             - "8081:8080"
