@@ -8,9 +8,9 @@ build veebiprojekt-frontend:
     refs:
       - master
   tags:
-    - frontend
+    - frontend-runner
   script:
-    - docker build -t veebiprojekt-frontend .
+    - docker build -t veebiprojekt-frontend
 
 deploy veebiprojekt-frontend:
   stage: deploy
@@ -18,7 +18,7 @@ deploy veebiprojekt-frontend:
     refs:
       - master
   tags:
-    - frontend
+    - frontend-runner
   script:
     - cd /opt/web-project/frontend
     - docker-compose down
