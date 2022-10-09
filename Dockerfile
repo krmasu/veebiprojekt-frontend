@@ -10,6 +10,6 @@ RUN npm install
 # copy project files and folders to the current working directory
 COPY . .
 # build app
-RUN ng run build
+RUN npm run build
 EXPOSE 8080
 CMD [ "http-server", "dist"]
