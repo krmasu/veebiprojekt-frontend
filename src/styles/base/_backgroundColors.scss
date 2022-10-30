@@ -1,0 +1,17 @@
+@import "src/styles/utils/variables";
+
+@each $value, $color in $all-colors {
+  .background-#{$value} {
+    background-color: $color;
+  }
+}
+
+@each $value, $color in $all-colors {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .background-#{$size}-#{$value} {
+        background-color: $color;
+      }
+    }
+  }
+}

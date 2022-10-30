@@ -1,0 +1,84 @@
+@import "src/styles/utils/variables";
+
+//flex directions
+@each $flexDir in $flexDirections {
+  .flex-#{$flexDir} {
+    flex-direction: #{$flexDir};
+  }
+}
+
+@each $flexDir in $flexDirections {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .flex-#{$size}-#{$flexDir} {
+        flex-direction: #{$flexDir};
+      }
+    }
+  }
+}
+
+//flex wrap
+@each $flexWrap in $flexWraps {
+  .flex-#{$flexWrap} {
+    flex-wrap: #{$flexWrap};
+  }
+}
+
+@each $flexWrap in $flexWraps {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .flex-#{$size}-#{$flexWrap} {
+        flex-wrap: #{$flexWrap};
+      }
+    }
+  }
+}
+
+//flex shrink
+@each $flexSize in $flexSizes {
+  .flex-shrink-#{$flexSize} {
+    flex-shrink: #{$flexSize};
+  }
+}
+@each $flexSize in $flexSizes {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .flex-shrink-#{$size}-#{$flexSize} {
+        flex-shrink: #{$flexSize};
+      }
+    }
+  }
+}
+
+//flex grow
+@each $flexSize in $flexSizes {
+  .flex-grow-#{$flexSize} {
+    flex-grow: #{$flexSize};
+  }
+}
+@each $flexSize in $flexSizes {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .flex-grow-#{$size}-#{$flexSize} {
+        flex-grow: #{$flexSize};
+      }
+    }
+  }
+}
+
+//order
+@each $flexSize in $flexSizes {
+  .order-#{$flexSize} {
+    order: #{$flexSize};
+  }
+}
+
+@each $flexSize in $flexSizes {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .order-#{$size}-#{$flexSize} {
+        order: #{$flexSize};
+      }
+    }
+  }
+}
