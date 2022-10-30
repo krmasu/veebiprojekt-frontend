@@ -1,0 +1,74 @@
+@import "src/styles/utils/variables";
+
+// siin ikkagi nimetamised pole ühtlased
+
+//
+// content, items aligment
+//
+
+@each $align in $alignments {
+  .justify-content-#{$align} {
+    justify-content: #{$align};
+}
+
+  .flex-align-items-#{$align} {
+    align-items: #{$align};
+}
+
+  .align-self-#{$align} {
+    align-self: #{$align};
+}
+
+  .justify-items-#{$align} {
+    justify-items: #{$align};
+}
+
+  .align-content-#{$align} {
+    align-content: #{$align};
+}
+}
+
+@each $align in $alignments {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+    .justify-content-#{$size}-#{$align} {
+      justify-content: #{$align};
+  }
+    .flex-align-items-#{$size}-#{$align} {
+      align-items: #{$align};
+  }
+
+    .align-self-#{$align} {
+      align-self: #{$align};
+  }
+
+    .justify-items-#{$size}-#{$align} {
+      justify-items: #{$align};
+  }
+
+    .align-content-#{$size}-#{$align} {
+      align-content: #{$align};
+  }
+  }
+}
+}
+
+//
+// text alignment
+//
+
+@each $textAlign in $textAlignments {
+  .text-#{$textAlign} {
+    text-align: #{$textAlign};
+}
+}
+
+@each $textAlign in $textAlignments {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+    .text-#{$size}-#{$textAlign} {
+      text-align: #{$textAlign};
+  }
+  }
+}
+}

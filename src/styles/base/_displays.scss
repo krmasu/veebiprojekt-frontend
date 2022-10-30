@@ -1,0 +1,17 @@
+@import "src/styles/utils/variables";
+
+@each $disp in $displays {
+  .d-#{$disp} {
+    display: #{$disp};
+  }
+}
+
+@each $disp in $displays {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .d-#{$size}-#{$disp} {
+        display: #{$disp};
+      }
+    }
+  }
+}
