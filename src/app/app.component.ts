@@ -1,35 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient } from "@angular/common/http";
-import {map} from 'rxjs/operators'
-import {Employee} from "./model/employee";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'veebiprojekt-frontend';
-  allEmployees: Employee[] = [];
+  loggedIn: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor() {
   }
 
-  ngOnInit(){
-    this.fetchEmployees();
-  }
-
-  onEmployeeFetch() {
-    this.fetchEmployees();
-  }
-
-  private fetchEmployees() {
-    this.http.get<Employee>('/api/employee/1')
-
-      .subscribe((res) => {
-        console.log(res)
-        this.allEmployees = [res]
-      })
+  logIn(event: any) {
+    this.loggedIn = event
   }
 }
 

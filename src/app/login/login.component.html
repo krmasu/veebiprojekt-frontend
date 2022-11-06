@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row justify-content-center flex-align-items-center">
+  <div class="col-6">
+    <div class="d-flex flex-column py-256">
+
+  <p>password: {{ password }}. username: {{username}}</p>
+    <p *ngIf="errorMessage" class="text-signal-error m-0">{{errorMessage}}</p>
+    <label class="mt-12">Kasutaja:</label>
+    <input type="text" name="username" (keyup)="onInput($event)"/>
+    <label class="mt-12">Parool:</label>
+    <input  name="password" (keyup)="onInput($event)"/>
+      <button class="mt-12" (click)="onLogin()">Login</button>
+    </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,49 @@
+@import "src/styles/utils/variables";
+
+@each $value, $color in $all-colors {
+  .text-#{$value} {
+    color: $color;
+  }
+}
+
+//
+// weight
+//
+
+@each $value in $fontWeight {
+  .text-#{$value} {
+    font-weight: $value;
+  }
+}
+
+//
+// utility
+//
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+.text-medium {
+  font-weight: $font-weight-medium;
+}
+
+.text-normal {
+  font-weight: $font-weight-normal;
+}
+
+.text-light {
+  font-weight: $font-weight-light;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
