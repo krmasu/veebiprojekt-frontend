@@ -1,0 +1,55 @@
+
+@import "src/styles/utils/variables";
+
+.input {
+  border: 1px solid $gray-accent-1;
+  background-color: $gray-accent-1;
+  outline: none;
+  &:hover {
+    border: 1px solid $gray-accent-2;
+  }
+  &:active {
+    border: 1px solid $brand-primary-default-accent;
+  }
+  &:focus {
+    border: 1px solid $brand-primary-default-accent;
+  }
+  &--error {
+    border: 1px solid $signal-error;
+  }
+  &--disabled {
+    background-color: $disabled-gray;
+  }
+}
+
+.input-sm {
+  border-radius: 4px;
+  &__label {
+    color: $black;
+    font-size: 14px;
+    text-align: left;
+    line-height: 20px;
+  }
+}
+
+.input-reg {
+  border-radius: 6px;
+  &__label {
+    color: $black;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    text-align: left;
+    line-height: 24px;
+  }
+}
+
+.input-lg {
+  border-radius: 8px;
+  &__label {
+    color: $black;
+    font-family: 'Open Sans';
+    font-size: 18px;
+    text-align: left;
+    line-height: 28px;
+  }
+}
