@@ -1,33 +1,5 @@
+<div class="background-gray-accent-1">
 
-
-<div class="p-128 background-gray-accent-1">
-  <h2 class="text-center mb-64">Our Angular website</h2>
-  <h3 class="text-center">Database data</h3>
-
-  <div class="d-flex justify-content-center">
-  <table id="products">
-    <tr>
-      <th class="px-16">
-        id
-      </th>
-      <th class="px-16">
-        firstname
-      </th>
-      <th class="px-16 text-right">
-        idcode
-      </th>
-      <th class="px-16">
-        roleId
-      </th>
-    </tr>
-    <tr *ngFor="let employee of allEmployees">
-      <td class="px-16">{{employee.id}}</td>
-      <td class="px-16">{{employee.firstName}}</td>
-      <td class="px-16">{{employee.idCode}}</td>
-      <td class="px-16">{{employee.roleId}}</td>
-    </tr>
-  </table>
-    </div>
+<router-outlet>
+</router-outlet>
 </div>
-
-<router-outlet></router-outlet>
