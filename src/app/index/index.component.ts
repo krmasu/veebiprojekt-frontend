@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../model/employee";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-index',
@@ -9,7 +10,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class IndexComponent implements OnInit {
   allEmployees: Employee[] = [];
-  constructor(private http: HttpClient) { }
+  showProjects = false;
+  constructor(private http: HttpClient, private _router: Router) { }
 
   ngOnInit(): void {
     this.fetchEmployees();
@@ -25,6 +27,10 @@ export class IndexComponent implements OnInit {
         console.log(res)
         this.allEmployees = [res]
       })
+  }
+
+  navigateToProjects() {
+    this._router.navigate(['projects'])
   }
 
 }
