@@ -1,18 +1,21 @@
 <div class="container">
-  <div class="row justify-content-center flex-align-items-center">
-  <div class="col-6">
-    <div class="d-flex flex-column py-256">
+  <div class="row justify-content-center flex-align-items-center fullHeight">
+  <div class="col-6 card-base-bordered-xs p-32 text-gray-accent-5 ">
+    <div class="d-flex flex-column ">
+      <h3 class="m-0 text-400">Login</h3>
 
-  <p>password: {{ password }}. username: {{username}}</p>
-    <p *ngIf="errorMessage" class="text-signal-error m-0">{{errorMessage}}</p>
-    <label class="mt-12">Kasutaja:</label>
-    <input type="text" name="username" (keyup)="onInput($event)"/>
-    <label class="mt-12">Parool:</label>
-    <input  name="password" (keyup)="onInput($event)"/>
-      <button class="mt-12" (click)="onLogin()">Login</button>
-      <button (click)="onRegister()">Register</button>
-
+      <p>password: {{ password }}. username: {{username}}</p>
+      <div class="d-flex flex-column">
+        <p *ngIf="errorMessage" class="text-signal-error m-0">{{errorMessage}}</p>
+        <label class=" text-gray-accent-5 mt-12 input-reg__label">Kasutaja:</label>
+        <input class='input input-reg py-4 px-8' type="text" name="username" (keyup)="onInput($event)"/>
+        <label class="text-gray-accent-5 mt-12 input-reg__label">Parool:</label>
+        <input class='input input-reg mb-12 py-4 px-8' type="password" name="password" (keyup)="onInput($event)"/>
+        <button class="mt-12 btn btn-sm btn-primary" (click)="onLogin()">Login</button>
+        <button class="mt-12 btn btn-sm btn-primary" (click)="navigateToRegister()">Register</button>
+      </div>
     </div>
-</div>
+
+  </div>
 </div>
 </div>

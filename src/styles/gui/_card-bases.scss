@@ -1,0 +1,52 @@
+@import "src/styles/utils/variables";
+
+
+@mixin card-base {
+  border-radius: 4px;
+  background-color: $neutral;
+}
+
+@mixin card-base-bordered {
+  @include card-base;
+  border: 1px solid $gray-accent-1;
+}
+
+.card-base-bordered-xs {
+  @include card-base-bordered;
+  box-shadow: $box-shadow-xs;
+}
+
+.card-base-bordered-sm {
+  @include card-base-bordered;
+  box-shadow: $box-shadow-sm;
+}
+
+.card-base-bordered-reg {
+  @include card-base-bordered;
+  box-shadow: $box-shadow-reg;
+}
+
+.card-base-bordered-lg {
+  @include card-base-bordered;
+  box-shadow: $box-shadow-lg;
+}
+
+.card-base-borderless-xs {
+  @include card-base;
+  box-shadow: $box-shadow-xs;
+}
+
+.card-base-borderless-sm {
+  @include card-base;
+  box-shadow: $box-shadow-sm;
+}
+
+.card-base-borderless-reg {
+  @include card-base;
+  box-shadow: $box-shadow-reg;
+}
+
+.card-base-borderless-lg {
+  @include card-base;
+  box-shadow: $box-shadow-lg;
+}

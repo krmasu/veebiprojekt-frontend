@@ -1,6 +1,5 @@
+<div class="background-gray-accent-1">
 
-<app-index *ngIf="loggedIn; else login"></app-index>
-<ng-template #login>
-  <app-login (loginEvent)="logIn($event)"></app-login>
-</ng-template>
-<router-outlet></router-outlet>
+<router-outlet>
+</router-outlet>
+</div>

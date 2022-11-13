@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center flex-align-items-center fullHeight">
+    <div class="col-6 card-base-bordered-xs p-32 text-gray-accent-5 ">
+      <div class="d-flex flex-column ">
+
+        <div class="d-flex flex-column">
+          <h3 class="m-0 text-400">Register</h3>
+          <label class="text-gray-accent-5 mt-12 input-reg__label">Kasutaja:</label>
+          <input class='input input-reg py-4 px-8' type="text" name="username" (keyup)="onInput($event)"/>
+          <label class="text-gray-accent-5 mt-12 input-reg__label">Email:</label>
+          <input class='input input-reg py-4 px-8' type="email" name="email" (keyup)="onInput($event)"/>
+          <label class="text-gray-accent-5 mt-12 input-reg__label">Parool:</label>
+          <input class='input input-reg mb-12 py-4 px-8' type="password" name="password" (keyup)="onInput($event)"/>
+          <button class="mt-12 btn btn-sm btn-primary" (click)="navigateToLogin()">Login</button>
+          <button class="mt-12 btn btn-sm btn-primary" (click)="onRegister()">Register</button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

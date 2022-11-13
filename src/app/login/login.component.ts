@@ -1,37 +1,41 @@
-import {Component, EventEmitter,  Output} from "@angular/core";
+import {Component} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+
 })
 export class LoginComponent {
   password: string = 'admin';
   username: string = 'admin';
-  loginData: Map<string, string> = new Map<string, string>([['username', ''], ['password', '']]);
+  inputData: Map<string, string> = new Map<string, string>([['username', ''], ['password', ''], ['email', '']]);
   errorMessage: string = ''
-  @Output() loginEvent = new EventEmitter<boolean>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _router: Router) { }
 
 
   onInput(event: any) {
-    this.loginData.set(event.target.name, event.target.value)
-    console.log(this.loginData)
+    this.inputData.set(event.target.name, event.target.value)
+    console.log(this.inputData)
   }
 
   onLogin() {
-    if (this.loginData.get('password') == this.password && this.loginData.get('username') == this.username) {
+    if (this.inputData.get('password') == this.password && this.inputData.get('username') == this.username) {
       this.errorMessage = '';
-      this.loginEvent.emit(true)
+      this.navigateToHome();
     } else {
       this.errorMessage = 'Error authenticating user'
     }
   }
-
-
-  onRegister() {
-    this.http.post<any>('/api/register', { username: 'Kristjan', password: '1234', email: 'kristjanmarcus@gmail.com'}).subscribe(data => {
-      console.log(data)
-    })
+  navigateToHome() {
+    this._router.navigate(['home'])
   }
+
+  navigateToRegister() {
+    this._router.navigate(['register'])
+  }
+
 }

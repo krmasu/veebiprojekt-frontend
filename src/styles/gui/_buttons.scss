@@ -1,0 +1,72 @@
+@import "src/styles/utils/variables";
+
+.btn {
+  text-align: center;
+  font-family: 'Open Sans';
+  color: $neutral;
+
+  &-primary {
+    background-color: $brand-primary-default-accent;
+    border: 1px solid $brand-primary-default-accent;
+    &:hover {
+      background-color: $brand-primary-dark-accent;
+      border: 1px solid $brand-primary-dark-accent;
+    }
+    &:active {
+      background-color: $brand-primary-light-accent;
+      border: 1px solid $brand-primary-light-accent;
+    }
+    &:focus {
+      background-color: $brand-primary-default-accent;
+      border: 1px solid $brand-primary-default-accent;
+    }
+  }
+
+  &-secondary {
+    background-color: $brand-secondary-default-accent;
+    border: 1px solid $brand-secondary-default-accent;
+
+    &:hover {
+      background-color: $brand-secondary-dark-accent;
+      border: 1px solid $brand-secondary-dark-accent;
+    }
+    &:active {
+      background-color: $brand-secondary-light-accent;
+      border: 1px solid $brand-secondary-light-accent;
+    }
+    &:focus {
+      background-color: $brand-secondary-default-accent;
+      border: 1px solid $brand-secondary-default-accent;
+    }
+  }
+
+  &-lg {
+    font-size: 18px;
+    line-height: 28px;
+    border-radius: 8px;
+    padding: 8px 24px;
+  }
+
+  &-reg {
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 6px;
+    padding: 6px 16px;
+  }
+
+  &-sm {
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 4px;
+    padding: 6px 12px;
+  }
+
+  &-link {
+    text-decoration: none;
+  }
+
+  &-disabled {
+    background-color: $disabled-gray;
+    border: 1px solid $disabled-gray;
+  }
+}

@@ -7,14 +7,10 @@ import {Component} from '@angular/core';
 })
 export class AppComponent{
   title = 'veebiprojekt-frontend';
-  loggedIn: boolean = false;
 
   constructor() {
   }
 
-  logIn(event: any) {
-    this.loggedIn = event
-  }
 }
 
 
