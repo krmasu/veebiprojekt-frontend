@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import {Router, RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {IndexComponent} from "./index/index.component";
+import { Router, RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
 import {ProjectsComponent} from "./projects/projects.component";
 import {HomeComponent} from "./home/home.component";
@@ -16,16 +16,15 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
-
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {}
 
   navigateToLogin() {
-    this._router.navigate(['login'])
+    this._router.navigate(['login']);
   }
   navigateToHome() {
-  this._router.navigate(['home'])
+    this._router.navigate(['home']);
   }
 }
