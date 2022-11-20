@@ -3,7 +3,7 @@
   <div class="topnavItem" (click)="navbarItem = 'projects'">Projects</div>
 </div>
 <div *ngIf="navbarItem == 'home'">
-  <app-home></app-home>
+  <app-home [showQuote]="quote" [showQuoteAuthor]="quoteAuthor"></app-home>
 </div>
 <div *ngIf="navbarItem == 'projects'">
   <app-projects [showProjects]="projects"></app-projects>
