@@ -36,9 +36,6 @@ export class IndexComponent implements OnInit {
             this.username = data.username;
             this.email = data.email;
             this.projects = data.projects;
-            console.log(this.username);
-            console.log(this.email);
-            console.log(this.projects);
           });
       } catch (e) {
         console.log(e);
