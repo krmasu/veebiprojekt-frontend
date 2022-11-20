@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
   userId: Number = -1;
   username = '';
   email = '';
-  projects = [];
+  projects: any[] = [];
 
   constructor(
     private http: HttpClient,
