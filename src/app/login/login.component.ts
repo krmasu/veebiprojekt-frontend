@@ -20,7 +20,6 @@ export class LoginComponent {
 
   onInput(event: any) {
     this.inputData.set(event.target.name, event.target.value);
-    console.log(this.inputData);
   }
 
   onLogin() {
