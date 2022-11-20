@@ -15,6 +15,8 @@ export class IndexComponent implements OnInit {
   username = '';
   email = '';
   projects = [];
+  quote = 'Requesting quote...';
+  quoteAuthor = 'Anoynymous';
 
   constructor(
     private http: HttpClient,
@@ -36,10 +38,12 @@ export class IndexComponent implements OnInit {
             this.username = data.username;
             this.email = data.email;
             this.projects = data.projects;
-            console.log(this.username);
-            console.log(this.email);
-            console.log(this.projects);
           });
+
+        this.http.get<any>('/api/quote/knowledge').subscribe((data) => {
+          this.quote = data.quote;
+          this.quoteAuthor = data.author;
+        });
       } catch (e) {
         console.log(e);
       }
