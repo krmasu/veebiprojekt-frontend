@@ -1,9 +1,3 @@
-<div class="topnav d-flex">
-  <a class="topnavItem" (click)='navigateToHome()'>Home</a>
-  <div class="topnavItem" (click)='navigateToProjects()'>Projects</div>
-</div>
 <div *ngFor="let project of projectsTestData">
-  <p>{{project.name}}</p>
+  <p>{{ project.name }}</p>
 </div>
-
-
