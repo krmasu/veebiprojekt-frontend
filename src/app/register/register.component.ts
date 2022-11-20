@@ -1,32 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  inputData: Map<string, string> = new Map<string, string>([['username', ''], ['password', ''], ['email', '']]);
+  inputData: Map<string, string> = new Map<string, string>([
+    ['username', ''],
+    ['password', ''],
+    ['email', ''],
+  ]);
+  registrationSuccess = false;
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private http: HttpClient, private _router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   onInput(event: any) {
-    this.inputData.set(event.target.name, event.target.value)
-    console.log(this.inputData)
+    this.inputData.set(event.target.name, event.target.value);
   }
 
   onRegister() {
-    this.http.post<any>('/api/register', { username: this.inputData.get('username'), password: this.inputData.get('password'), email: this.inputData.get('email')}).subscribe(data => {
-      console.log(data)
-    })
-    this.navigateToLogin()
+    if (
+      this.inputData.get('username') != '' &&
+      this.inputData.get('password') != '' &&
+      this.inputData.get('email') != ''
+    ) {
+      try {
+        this.http
+          .post<any>('/api/register', {
+            username: this.inputData.get('username'),
+            password: this.inputData.get('password'),
+            email: this.inputData.get('email'),
+          })
+          .subscribe((data) => {
+            this.registrationSuccess = true;
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   navigateToLogin() {
-    this._router.navigate(['login'])
+    this._router.navigate(['login']);
   }
 }
