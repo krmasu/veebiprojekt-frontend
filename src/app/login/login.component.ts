@@ -44,7 +44,7 @@ export class LoginComponent {
   }
 
   navigateToHome(userId: Number) {
-    this._router.navigate(['home', { queryParams: { userId: userId } }]);
+    this._router.navigateByUrl(`index?userId=${userId}`);
   }
 
   navigateToRegister() {

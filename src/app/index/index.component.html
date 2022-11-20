@@ -1,10 +1,10 @@
 <div class="topnav d-flex">
-  <a class="topnavItem" (click)='showProjects = false'>Home</a>
-  <div class="topnavItem" (click)='showProjects = true'>Projects</div>
+  <a class="topnavItem" (click)="navbarItem = 'home'">Home</a>
+  <div class="topnavItem" (click)="navbarItem = 'projects'">Projects</div>
 </div>
-<div *ngIf="!showProjects">
+<div *ngIf="navbarItem == 'home'">
   <app-home></app-home>
 </div>
-<div *ngIf="showProjects">
+<div *ngIf="navbarItem == 'projects'">
   <app-projects></app-projects>
 </div>
