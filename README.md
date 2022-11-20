@@ -53,9 +53,9 @@
 - There you can find the URL and registration token.
 - Run `gitlab-runner register`
 - Enter the URL `https://gitlab.cs.ttu.ee/`
-- Enter the registration token `GR1348941LR37xkACSNqQjnEGGdtj`
-- Enter description: `Backend runner`
-- Enter tag: `backend-runner`
+- Enter the registration token `GR1348941hK1rt_7edHLNmMaaGYrZ`
+- Enter description: `Frontend runner`
+- Enter tag: `frontend-runner`
 - Enter executor: `shell`
 
 ### Nginx setup
