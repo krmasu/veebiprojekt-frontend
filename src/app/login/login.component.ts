@@ -29,11 +29,13 @@ export class LoginComponent {
     ) {
       try {
         this.http
-          .post<any>('/api/login', {
+          .post<any>('/api/public/login', {
             username: this.inputData.get('username'),
             password: this.inputData.get('password'),
           })
           .subscribe((data) => {
+            localStorage.setItem('authToken', data.authToken);
+            console.log(data);
             this.navigateToHome(data.id);
           });
       } catch (e) {

@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     ) {
       try {
         this.http
-          .post<any>('/api/register', {
+          .post<any>('/api/public/register', {
             username: this.inputData.get('username'),
             password: this.inputData.get('password'),
             email: this.inputData.get('email'),

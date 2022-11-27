@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../model/employee';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -30,20 +30,29 @@ export class IndexComponent implements OnInit {
     });
     if (this.userId != -1) {
       try {
+        const headers = new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
         this.http
-          .post<any>('/api/user', {
-            id: this.userId,
-          })
+          .post<any>(
+            '/api/user',
+            {
+              id: this.userId,
+            },
+            { headers: headers }
+          )
           .subscribe((data) => {
             this.username = data.username;
             this.email = data.email;
             this.projects = data.projects;
           });
 
-        this.http.get<any>('/api/quote/knowledge').subscribe((data) => {
-          this.quote = data.quote;
-          this.quoteAuthor = data.author;
-        });
+        this.http
+          .get<any>('/api/quote/knowledge', { headers: headers })
+          .subscribe((data) => {
+            this.quote = data.quote;
+            this.quoteAuthor = data.author;
+          });
       } catch (e) {
         console.log(e);
       }
