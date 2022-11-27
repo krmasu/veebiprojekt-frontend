@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -8,9 +9,44 @@ import { Router } from '@angular/router';
 })
 export class ProjectsComponent implements OnInit {
   @Input() showProjects: any[] = [{ title: 'example', id: 'example' }];
-  constructor(private _router: Router) {}
+  constructor(
+    private _router: Router,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
+  newProjectName = '';
+  userId = -1;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.userId = Number(params['userId']);
+    });
+  }
+
+  onInput(event: any) {
+    this.newProjectName = event.target.value;
+  }
+
+  registerProject() {
+    if (this.userId != -1) {
+      try {
+        const headers = new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+        this.http
+          .post<any>(
+            '/api/project',
+            { ownerId: this.userId, title: this.newProjectName },
+            { headers: headers }
+          )
+          .subscribe((data) => {
+            this.showProjects = data;
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 
   navigateToProjects() {
     this._router.navigate(['projects']);

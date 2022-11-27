@@ -1,5 +1,7 @@
 <div class="p-128">
   <div class="d-flex justify-content-center"></div>
+  <input (keyup)="onInput($event)" />
+  <button (click)="registerProject()">New Project</button>
   <table>
     <tr>
       <th>Id</th>
