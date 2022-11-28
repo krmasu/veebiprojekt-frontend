@@ -48,11 +48,38 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
+  deleteProject(projectId: Number) {
+    if (this.userId != -1) {
+      try {
+        const options = {
+          headers: new HttpHeaders()
+            .set('content-type', 'application/json')
+            .set(
+              'Authorization',
+              `Bearer ${localStorage.getItem('authToken')}`
+            ),
+          body: { ownerId: this.userId, projectId: projectId },
+        };
+        this.http.delete<any>('/api/project', options).subscribe((data) => {
+          this.showProjects = data;
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   navigateToProjects() {
     this._router.navigate(['projects']);
   }
 
   navigateToHome() {
     this._router.navigate(['home']);
+  }
+
+  navigateToProjectView(projectId: Number) {
+    this._router.navigateByUrl(
+      `project-view?userId=${this.userId}&projectId=${projectId}`
+    );
   }
 }

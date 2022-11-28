@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-124">
+      <h1>{{ projectTitle }}</h1>
+      <input
+        (keyup)="onInput($event)"
+        placeholder="new title"
+        class="input input-sm"
+      />
+      <button
+        (click)="updateProject()"
+        class="width-50 btn btn-sm background-signal-danger text-black border-none cursor-pointer"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+</div>

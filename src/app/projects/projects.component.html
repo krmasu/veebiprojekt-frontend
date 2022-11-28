@@ -1,15 +1,29 @@
 <div class="p-128">
   <div class="d-flex justify-content-center"></div>
   <input (keyup)="onInput($event)" />
-  <button (click)="registerProject()">New Project</button>
+  <button
+    class="btn btn-sm background-signal-success border-none"
+    (click)="registerProject()"
+  >
+    New Project
+  </button>
   <table>
     <tr>
       <th>Id</th>
       <th>Title</th>
+      <th>Delete</th>
     </tr>
     <tr *ngFor="let project of showProjects">
-      <td>{{ project.id }}</td>
-      <td>{{ project.title }}</td>
+      <td (click)="navigateToProjectView(project.id)">{{ project.id }}</td>
+      <td (click)="navigateToProjectView(project.id)">{{ project.title }}</td>
+      <td>
+        <button
+          class="width-100 btn btn-sm background-signal-error border-none cursor-pointer"
+          (click)="deleteProject(project.id)"
+        >
+          Delete
+        </button>
+      </td>
     </tr>
   </table>
 </div>

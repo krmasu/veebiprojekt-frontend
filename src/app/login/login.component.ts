@@ -35,7 +35,6 @@ export class LoginComponent {
           })
           .subscribe((data) => {
             localStorage.setItem('authToken', data.authToken);
-            console.log(data);
             this.navigateToHome(data.id);
           });
       } catch (e) {
