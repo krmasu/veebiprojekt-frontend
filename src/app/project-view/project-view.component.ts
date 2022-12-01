@@ -158,7 +158,7 @@ export class ProjectViewComponent implements OnInit {
             { headers: headers }
           )
           .subscribe((data) => {
-            this.projectTasks = data;
+            this.projectTasks = data.tasks;
           });
       } catch (e) {
         console.log(e);
