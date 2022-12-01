@@ -1,0 +1,24 @@
+<div class="container pt-128">
+  <div class="row">
+    <div class="col-12">
+      <label>Title</label>
+      <div>
+        <input [(ngModel)]="title" />
+      </div>
+      <label>Description</label>
+      <div>
+        <textarea maxlength="255" rows="5" [(ngModel)]="description"></textarea>
+      </div>
+      <label>Deadline</label>
+      <div>
+        <input [(ngModel)]="deadline" type="date" />
+      </div>
+      <button
+        class="width-100 btn btn-sm background-signal-danger border-none cursor-pointer"
+        (click)="onUpdateTask()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
