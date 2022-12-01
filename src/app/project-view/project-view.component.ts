@@ -23,6 +23,7 @@ export class ProjectViewComponent implements OnInit {
 
   projectTasks = [
     {
+      id: '',
       title: 'example',
       description: '',
       deadline: '',
@@ -158,7 +159,29 @@ export class ProjectViewComponent implements OnInit {
             { headers: headers }
           )
           .subscribe((data) => {
-            this.projectTasks = data;
+            this.projectTasks = data.tasks;
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  onDeleteTask(taskId: string) {
+    if (this.userId != -1) {
+      try {
+        const options = {
+          headers: new HttpHeaders()
+            .set('content-type', 'application/json')
+            .set(
+              'Authorization',
+              `Bearer ${localStorage.getItem('authToken')}`
+            ),
+        };
+        this.http
+          .delete<any>(`api/project/${this.projectId}/${taskId}`, options)
+          .subscribe((data) => {
+            this.projectTasks = data.tasks;
           });
       } catch (e) {
         console.log(e);
@@ -185,5 +208,29 @@ export class ProjectViewComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  navigateToTaskView(
+    taskId: String,
+    title: String,
+    description: String,
+    deadline: String,
+    milestoneId: String,
+    statusId: String,
+    assignee: String
+  ) {
+    const taskData = JSON.stringify({
+      title: title,
+      description: description,
+      deadline: deadline,
+      milestoneId: milestoneId,
+      statusId: statusId,
+      assignee: assignee,
+    });
+    sessionStorage.setItem('taskData', taskData);
+
+    this._router.navigateByUrl(
+      `task-view?userId=${this.userId}&projectId=${this.projectId}&taskId=${taskId}`
+    );
   }
 }
