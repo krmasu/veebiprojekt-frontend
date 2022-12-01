@@ -132,7 +132,6 @@ export class ProjectViewComponent implements OnInit {
           { headers: headers }
         )
         .subscribe((data) => {
-          console.log(data);
           this.totalPages = [...Array(data.totalPages).keys()];
           this.projectTasks = data.tasks;
         });
@@ -159,7 +158,6 @@ export class ProjectViewComponent implements OnInit {
             { headers: headers }
           )
           .subscribe((data) => {
-            console.log(data);
             this.projectTasks = data;
           });
       } catch (e) {
