@@ -36,14 +36,25 @@
       <div>
         <button (click)="onAddTask()">Add task</button>
       </div>
+
+      <input
+        name="textInput"
+        placeholder="filter by {{ filteringData.get('filterBy') }}"
+        (keyup)="onFilteringInput($event)"
+      />
+      <select class="my-16" name="filterBy" (change)="onFilteringInput($event)">
+        <option *ngFor="let filterOption of filteringOptions">
+          {{ filterOption }}
+        </option>
+      </select>
       <table>
         <tr>
-          <th>Title</th>
+          <th (click)="getSortedTasks('title')">Title</th>
           <th>Description</th>
           <th>Deadline</th>
-          <th>milestoneId</th>
-          <th>statusId</th>
-          <th>assignee</th>
+          <th (click)="getSortedTasks('milestone')">milestoneId</th>
+          <th (click)="getSortedTasks('status')">statusId</th>
+          <th (click)="getSortedTasks('assignee')">assignee</th>
         </tr>
         <tr *ngFor="let task of projectTasks">
           <td>
@@ -69,7 +80,14 @@
       <div class="d-flex gap-32">
         <div
           class="py-8 px-12 border-radius-16 background-gray-accent-5 text-neutral cursor-pointer"
-          *ngFor="let page of pages"
+          *ngFor="let page of totalPages"
+          (click)="
+            onGetTasks(
+              this.paginationSettings.get('sort'),
+              this.paginationSettings.get('size'),
+              page
+            )
+          "
         >
           {{ page }}
         </div>

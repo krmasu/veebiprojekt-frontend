@@ -16,8 +16,11 @@ export class ProjectViewComponent implements OnInit {
     ['title', ''],
     ['description', ''],
     ['deadline', ''],
+    ['assignee', ''],
   ]);
-  pages = [0, 1, 2, 3, 4, 5];
+  totalPages: number[] = [];
+  direction = 'asc';
+
   projectTasks = [
     {
       title: 'example',
@@ -29,6 +32,20 @@ export class ProjectViewComponent implements OnInit {
       assignee: '',
     },
   ];
+
+  ascending = true;
+
+  filteringOptions = ['title', 'assignee', 'status', 'milestone'];
+  filteringData: Map<string, string> = new Map<string, string>([
+    ['filterBy', 'title'],
+    ['textInput', ''],
+  ]);
+  paginationSettings: Map<string, any> = new Map<string, any>([
+    ['sort', ''],
+    ['size', 10],
+    ['page', 0],
+  ]);
+
   constructor(
     private http: HttpClient,
     private _router: Router,
@@ -49,6 +66,7 @@ export class ProjectViewComponent implements OnInit {
           .get<any>(`/api/project/${this.projectId}`, { headers: headers })
           .subscribe((data) => {
             console.log(data);
+
             this.projectTitle = data.title;
           });
       } catch (e) {
@@ -64,24 +82,57 @@ export class ProjectViewComponent implements OnInit {
 
   onNewTaskInput(event: any) {
     this.newTaskData.set(event.target.name, event.target.value);
-    console.log(this.newTaskData);
   }
 
-  onGetTasks(sort = '', size = 10, page = 1) {
+  onFilteringInput(event: any) {
+    this.filteringData.set(event.target.name, event.target.value);
+    this.onGetTasks();
+    console.log(this.filteringData);
+  }
+
+  getSortedTasks(sort: string) {
+    this.setDirection();
+    this.onGetTasks(sort);
+  }
+
+  setDirection() {
+    if (this.ascending) {
+      this.direction = 'asc';
+      this.ascending = false;
+    } else {
+      this.direction = 'desc';
+      this.ascending = true;
+    }
+  }
+
+  onGetTasks(
+    sort = this.paginationSettings.get('sort'),
+    size = this.paginationSettings.get('size'),
+    page = this.paginationSettings.get('page')
+  ) {
+    this.paginationSettings.set('sort', sort);
+    this.paginationSettings.set('size', size);
+    this.paginationSettings.set('page', page);
+
     try {
       const headers = new HttpHeaders()
         .set('content-type', 'application/json')
         .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
       this.http
         .get<any>(
-          `/api/project/${this.projectId}/task/${
-            sort && `?sort=${sort}?limit=${size}?page=${page}`
+          `/api/project/${this.projectId}/task/?size=${size}&page=${page}${
+            sort && `&sort=${sort},${this.direction}`
+          }${
+            this.filteringData.get('textInput') &&
+            `&${this.filteringData.get('filterBy')}=${this.filteringData.get(
+              'textInput'
+            )}`
           }`,
 
           { headers: headers }
         )
         .subscribe((data) => {
-          console.log(data);
+          this.totalPages = [...Array(data.totalPages).keys()];
           this.projectTasks = data.tasks;
         });
     } catch (e) {
@@ -107,7 +158,6 @@ export class ProjectViewComponent implements OnInit {
             { headers: headers }
           )
           .subscribe((data) => {
-            console.log(data);
             this.projectTasks = data;
           });
       } catch (e) {
