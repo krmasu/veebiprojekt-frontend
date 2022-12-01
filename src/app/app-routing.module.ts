@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
+import { TaskViewComponent } from './task-view/task-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: '', component: LoginComponent },
   { path: 'project-view', component: ProjectViewComponent },
+  { path: 'task-view', component: TaskViewComponent },
 ];
 
 @NgModule({
