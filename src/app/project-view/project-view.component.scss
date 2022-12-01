@@ -1,5 +1,3 @@
-@import "src/styles/utils/variables";
-
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -16,20 +14,4 @@ th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
-}
-
-.border-none {
-  border: none;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.width-100 {
-  width: 100%;
-}
-
-.width-50 {
-  width: 50%;
 }

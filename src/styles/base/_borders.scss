@@ -1,0 +1,77 @@
+@import "src/styles/utils/variables";
+
+@each $spacing, $value in $spacers {
+  .border-radius-#{$spacing} {
+    border-radius: $value;
+  }
+
+  .border-radius-top-#{$spacing} {
+    border-top-left-radius: $value;
+    border-top-right-radius: $value;
+  }
+
+  .border-radius-bottom-#{$spacing} {
+    border-bottom-left-radius: $value;
+    border-bottom-right-radius: $value;
+  }
+}
+
+@each $spacing, $value in $spacers {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: $breakpoint) {
+      .border-radius-#{$size}-#{$spacing} {
+        border-radius: $value;
+      }
+    }
+  }
+}
+
+@each $value, $color in $all-colors {
+  .border-top-#{$value} {
+    border-top: 1px solid $color;
+  }
+
+  .border-bottom-#{$value} {
+    border-bottom: 1px solid $color;
+  }
+
+  .border-#{$value} {
+    border: 1px solid $color;
+  }
+}
+
+.border-error {
+  border: 3px solid $signal-error;
+}
+
+.border-disabled-gray {
+  border: 3px solid $disabled-gray;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.rounded-top {
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+}
+
+.rounded-end {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+}
+
+.rounded-bottom {
+  border-bottom-right-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}
+
+.rounded-start {
+  border-bottom-left-radius: 0.25rem !important;
+  border-top-left-radius: 0.25rem !important;
+}
