@@ -149,4 +149,29 @@ export class MilestonesComponent implements OnInit {
       }
     }
   }
+
+  onDeleteMilestone(milestoneId: string) {
+    if (this.userId != -1) {
+      try {
+        const options = {
+          headers: new HttpHeaders()
+            .set('content-type', 'application/json')
+            .set(
+              'Authorization',
+              `Bearer ${localStorage.getItem('authToken')}`
+            ),
+        };
+        this.http
+          .delete<any>(
+            `api/project/${this.projectId}/milestone/${milestoneId}`,
+            options
+          )
+          .subscribe((data) => {
+            this.milestones = data.milestones;
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 }

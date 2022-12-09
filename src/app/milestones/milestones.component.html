@@ -53,6 +53,7 @@
     <th>Description</th>
     <th>Start Date</th>
     <th>End Date</th>
+    <th>Delete</th>
   </tr>
   <tr *ngFor="let milestone of milestones">
     <td>
@@ -69,6 +70,14 @@
     </td>
     <td>
       {{ milestone.endDate }}
+    </td>
+    <td>
+      <button
+        class="width-100 btn btn-sm background-signal-error border-none cursor-pointer"
+        (click)="onDeleteMilestone(milestone.id)"
+      >
+        Delete
+      </button>
     </td>
   </tr>
 </table>
