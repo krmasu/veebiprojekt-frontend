@@ -133,6 +133,7 @@ export class ProjectViewComponent implements OnInit {
           { headers: headers }
         )
         .subscribe((data) => {
+          console.log(data);
           this.totalPages = [...Array(data.totalPages).keys()];
           this.projectTasks = data.tasks;
         });
@@ -179,7 +180,7 @@ export class ProjectViewComponent implements OnInit {
             ),
         };
         this.http
-          .delete<any>(`api/project/${this.projectId}/${taskId}`, options)
+          .delete<any>(`api/project/${this.projectId}/task/${taskId}`, options)
           .subscribe((data) => {
             this.projectTasks = data.tasks;
           });

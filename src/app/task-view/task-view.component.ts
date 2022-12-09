@@ -50,16 +50,9 @@ export class TaskViewComponent implements OnInit {
           .set('content-type', 'application/json')
           .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
       };
-      // private String title;
-      // private String description;
-      /// private LocalDate deadline;
-      // private Integer assigneeId;
-      // private Integer statusId;
-      /// private List<Integer> labelIds;
-      //private Integer milestoneId;
       this.http
         .patch<any>(
-          `api/project/${this.projectId}/${this.taskId}`,
+          `api/project/${this.projectId}/task/${this.taskId}`,
           {
             title: this.title,
             description: this.description,
