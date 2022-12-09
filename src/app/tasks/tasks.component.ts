@@ -16,6 +16,7 @@ export class TasksComponent implements OnInit {
     ['description', ''],
     ['deadline', ''],
     ['assignee', ''],
+    ['milestone', ''],
   ]);
 
   totalPages: number[] = [];
@@ -32,6 +33,9 @@ export class TasksComponent implements OnInit {
       assignee: '',
     },
   ];
+
+  milestoneSelectionIds: Map<string, any> = new Map<string, any>();
+  milestoneSelection: string[] = [];
 
   ascending = true;
   direction = 'asc';
@@ -57,6 +61,7 @@ export class TasksComponent implements OnInit {
       this.userId = Number(params['userId']);
     });
     this.onGetTasks();
+    this.getMilestones();
   }
 
   onNewTaskInput(event: any) {
@@ -120,6 +125,7 @@ export class TasksComponent implements OnInit {
 
   onAddTask() {
     if (this.newTaskData.get('title')) {
+      const milestoneTitle = this.newTaskData.get('milestone');
       try {
         const headers = new HttpHeaders()
           .set('content-type', 'application/json')
@@ -132,11 +138,36 @@ export class TasksComponent implements OnInit {
               description: this.newTaskData.get('description'),
               deadline: this.newTaskData.get('deadline'),
               projectId: this.projectId,
+              milestoneId: this.milestoneSelectionIds.get(milestoneTitle!),
             },
             { headers: headers }
           )
           .subscribe((data) => {
             this.projectTasks = data.tasks;
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  getMilestones(): void {
+    if (this.projectId != -1) {
+      try {
+        this.http
+          .get<any>(`api/project/${this.projectId}/milestone`, {
+            headers: new HttpHeaders()
+              .set('content-type', 'application/json')
+              .set(
+                'Authorization',
+                `Bearer ${localStorage.getItem('authToken')}`
+              ),
+          })
+          .subscribe((data) => {
+            data.milestones.map((milestone: any) => {
+              this.milestoneSelectionIds.set(milestone.title, milestone.id);
+              this.milestoneSelection.push(milestone.title);
+            });
           });
       } catch (e) {
         console.log(e);

@@ -22,6 +22,14 @@
       (keyup)="onNewTaskInput($event)"
     />
   </div>
+  <label>Milestone</label>
+  <div>
+    <select name="milestone" (change)="onNewTaskInput($event)">
+      <option *ngFor="let milestoneOption of milestoneSelection">
+        {{ milestoneOption }}
+      </option>
+    </select>
+  </div>
 </div>
 <div>
   <button (click)="onAddTask()">Add task</button>

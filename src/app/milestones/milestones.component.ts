@@ -174,4 +174,25 @@ export class MilestonesComponent implements OnInit {
       }
     }
   }
+
+  navigateToMilestoneView(
+    title: String,
+    description: String,
+    milestoneId: String,
+    startDate: String,
+    endDate: String
+  ) {
+    const taskData = JSON.stringify({
+      title: title,
+      description: description,
+      milestoneId: milestoneId,
+      startDate: startDate,
+      endDate: endDate,
+    });
+    sessionStorage.setItem('taskData', taskData);
+
+    this._router.navigateByUrl(
+      `milestone-view?userId=${this.userId}&projectId=${this.projectId}&milestoneId=${milestoneId}`
+    );
+  }
 }

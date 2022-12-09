@@ -54,6 +54,7 @@
     <th>Start Date</th>
     <th>End Date</th>
     <th>Delete</th>
+    <th>View</th>
   </tr>
   <tr *ngFor="let milestone of milestones">
     <td>
@@ -77,6 +78,22 @@
         (click)="onDeleteMilestone(milestone.id)"
       >
         Delete
+      </button>
+    </td>
+    <td>
+      <button
+        class="width-100 btn btn-sm border-none cursor-pointer background-signal-danger"
+        (click)="
+          navigateToMilestoneView(
+            milestone.title,
+            milestone.description,
+            milestone.id,
+            milestone.startDate,
+            milestone.endDate
+          )
+        "
+      >
+        View
       </button>
     </td>
   </tr>

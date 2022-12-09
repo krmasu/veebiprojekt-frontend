@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MilestonesComponent } from './milestones/milestones.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { InfoComponent } from './info/info.component';
+import { MilestoneViewComponent } from './milestone-view/milestone-view.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { InfoComponent } from './info/info.component';
     MilestonesComponent,
     TasksComponent,
     InfoComponent,
+    MilestoneViewComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

@@ -5,6 +5,7 @@ import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
 import { TaskViewComponent } from './task-view/task-view.component';
+import { MilestoneViewComponent } from './milestone-view/milestone-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'project-view', component: ProjectViewComponent },
   { path: 'task-view', component: TaskViewComponent },
+  { path: 'milestone-view', component: MilestoneViewComponent },
 ];
 
 @NgModule({
