@@ -37,7 +37,6 @@ export class TaskViewComponent implements OnInit {
     this.deadline = `${String(taskData.deadline[0]).padStart(4, '0')}-${String(
       taskData.deadline[1]
     ).padStart(2, '0')}-${String(taskData.deadline[2]).padStart(2, '0')}`;
-    console.log(this.deadline);
     this.assignee = taskData.assignee;
     this.statusId = taskData.statusId;
     this.milestoneId = taskData.milestoneId;

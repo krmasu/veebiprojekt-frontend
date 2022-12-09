@@ -68,7 +68,6 @@ export class MilestonesComponent implements OnInit {
   onFilteringInput(event: any) {
     this.filteringData.set(event.target.name, event.target.value);
     this.getMilestones();
-    console.log(this.filteringData);
   }
 
   getSortedTasks(sort: string) {
@@ -141,7 +140,6 @@ export class MilestonesComponent implements OnInit {
             }
           )
           .subscribe((data) => {
-            console.log(data);
             this.totalPages = [...Array(data.totalPages).keys()];
 
             this.milestones = data.milestones;

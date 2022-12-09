@@ -13,6 +13,8 @@ import { ProjectViewComponent } from './project-view/project-view.component';
 import { TaskViewComponent } from './task-view/task-view.component';
 import { FormsModule } from '@angular/forms';
 import { MilestonesComponent } from './milestones/milestones.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MilestonesComponent } from './milestones/milestones.component';
     ProjectViewComponent,
     TaskViewComponent,
     MilestonesComponent,
+    TasksComponent,
+    InfoComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

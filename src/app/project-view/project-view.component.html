@@ -1,131 +1,22 @@
+<div class="topnav d-flex">
+  <a class="topnavItem" (click)="navbarItem = 'info'">Info</a>
+  <a class="topnavItem" (click)="navbarItem = 'tasks'">Tasks</a>
+  <a class="topnavItem" (click)="navbarItem = 'milestones'">Milestones</a>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-12 mt-124">
       <h1>{{ projectTitle }}</h1>
-      <input (keyup)="onInput($event)" placeholder="new title" class="" />
-      <button
-        (click)="updateProject()"
-        class="width-50 btn btn-sm background-signal-danger text-black border-none cursor-pointer"
-      >
-        Update project title
-      </button>
-      <div>
-        <h3>New task</h3>
-        <label>Task name</label>
-        <div>
-          <input name="title" (keyup)="onNewTaskInput($event)" />
-        </div>
-
-        <label>Description</label>
-        <div>
-          <textarea
-            name="description"
-            maxlength="255"
-            (keyup)="onNewTaskInput($event)"
-          ></textarea>
-        </div>
-        <label>Deadline</label>
-        <div>
-          <input
-            name="deadline"
-            type="date"
-            (change)="onNewTaskInput($event)"
-            (keyup)="onNewTaskInput($event)"
-          />
-        </div>
+      <div *ngIf="navbarItem == 'info'">
+        <app-info
+          [title]="projectTitle"
+          (newTitleCreated)="onUpdateTitle($event)"
+        ></app-info>
       </div>
-      <div>
-        <button (click)="onAddTask()">Add task</button>
+      <div *ngIf="navbarItem == 'tasks'"><app-tasks></app-tasks></div>
+      <div *ngIf="navbarItem == 'milestones'">
+        <app-milestones></app-milestones>
       </div>
-
-      <input
-        name="textInput"
-        placeholder="filter by {{ filteringData.get('filterBy') }}"
-        (keyup)="onFilteringInput($event)"
-      />
-      <select class="my-16" name="filterBy" (change)="onFilteringInput($event)">
-        <option *ngFor="let filterOption of filteringOptions">
-          {{ filterOption }}
-        </option>
-      </select>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th (click)="getSortedTasks('title')">Title</th>
-          <th>Description</th>
-          <th>Deadline</th>
-          <th (click)="getSortedTasks('milestone')">milestoneId</th>
-          <th (click)="getSortedTasks('status')">statusId</th>
-          <th (click)="getSortedTasks('assignee')">assignee</th>
-          <th>Delete</th>
-          <th>Edit</th>
-        </tr>
-        <tr *ngFor="let task of projectTasks">
-          <td>
-            {{ task.id }}
-          </td>
-          <td>
-            {{ task.title }}
-          </td>
-          <td>
-            {{ task.description }}
-          </td>
-          <td>
-            {{ task.deadline }}
-          </td>
-          <td>
-            {{ task.milestoneId }}
-          </td>
-          <td>
-            {{ task.statusId }}
-          </td>
-          <td>
-            {{ task.assignee }}
-          </td>
-          <td>
-            <button
-              class="width-100 btn btn-sm background-signal-error border-none cursor-pointer"
-              (click)="onDeleteTask(task.id)"
-            >
-              Delete
-            </button>
-          </td>
-          <td>
-            <button
-              class="width-100 btn btn-sm border-none cursor-pointer background-signal-danger"
-              (click)="
-                navigateToTaskView(
-                  task.id,
-                  task.title,
-                  task.description,
-                  task.deadline,
-                  task.milestoneId,
-                  task.statusId,
-                  task.assignee
-                )
-              "
-            >
-              Edit
-            </button>
-          </td>
-        </tr>
-      </table>
-      <div class="d-flex gap-32">
-        <div
-          class="py-8 px-12 border-radius-16 background-gray-accent-5 text-neutral cursor-pointer"
-          *ngFor="let page of totalPages"
-          (click)="
-            onGetTasks(
-              this.paginationSettings.get('sort'),
-              this.paginationSettings.get('size'),
-              page
-            )
-          "
-        >
-          {{ page }}
-        </div>
-      </div>
-      <app-milestones></app-milestones>
     </div>
   </div>
 </div>
