@@ -40,10 +40,14 @@ export class TaskViewComponent implements OnInit {
     const taskData = JSON.parse(json);
     this.title = taskData.title;
     this.description = taskData.description;
-    this.deadline = `${String(taskData.deadline[0]).padStart(4, '0')}-${String(
-      taskData.deadline[1]
-    ).padStart(2, '0')}-${String(taskData.deadline[2]).padStart(2, '0')}`;
-
+    if (taskData.deadline) {
+      this.deadline = `${String(taskData.deadline[0]).padStart(
+        4,
+        '0'
+      )}-${String(taskData.deadline[1]).padStart(2, '0')}-${String(
+        taskData.deadline[2]
+      ).padStart(2, '0')}`;
+    }
     this.assignee = taskData.assignee;
     this.statusId = taskData.statusId;
     this.milestoneId = taskData.milestoneId;
@@ -99,9 +103,11 @@ export class TaskViewComponent implements OnInit {
               this.milestoneSelectionIds.set(milestone.title, milestone.id);
               this.milestoneSelection.push(milestone.title);
               if (milestone.id == this.milestoneId) {
+                console.log(milestone.title);
                 this.activeMilestone = milestone.title;
               }
             });
+            this.milestoneSelection.push('');
           });
       } catch (e) {
         console.log(e);

@@ -24,8 +24,70 @@
       >
         Save
       </button>
-
-      <app-tasks></app-tasks>
+      <table>
+        <tr>
+          <th>Id</th>
+          <th (click)="getSortedTasks('title')">Title</th>
+          <th>Description</th>
+          <th>Deadline</th>
+          <th (click)="getSortedTasks('milestone')">milestoneId</th>
+          <th (click)="getSortedTasks('status')">statusId</th>
+          <th (click)="getSortedTasks('assignee')">assignee</th>
+          <th>Delete</th>
+          <th>Edit</th>
+        </tr>
+        <tr *ngFor="let task of milestoneTasks">
+          <ng-container *ngIf="task.title != ''">
+            <td>
+              {{ task.id }}
+            </td>
+            <td>
+              {{ task.title }}
+            </td>
+            <td>
+              {{ task.description }}
+            </td>
+            <td>
+              {{ task.deadline }}
+            </td>
+            <td>
+              {{ task.milestoneId }}
+            </td>
+            <td>
+              {{ task.statusId }}
+            </td>
+            <td>
+              {{ task.assignee }}
+            </td>
+            <td>
+              <button
+                class="width-100 btn btn-sm background-signal-error border-none cursor-pointer"
+                (click)="onDeleteTask(task.id)"
+              >
+                Delete
+              </button>
+            </td>
+            <td>
+              <button
+                class="width-100 btn btn-sm border-none cursor-pointer background-signal-danger"
+                (click)="
+                  navigateToTaskView(
+                    task.id,
+                    task.title,
+                    task.description,
+                    task.deadline,
+                    task.milestoneId,
+                    task.statusId,
+                    task.assignee
+                  )
+                "
+              >
+                Edit
+              </button>
+            </td>
+          </ng-container>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
