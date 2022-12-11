@@ -16,6 +16,7 @@ import { MilestonesComponent } from './milestones/milestones.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { InfoComponent } from './info/info.component';
 import { MilestoneViewComponent } from './milestone-view/milestone-view.component';
+import { LabelComponent } from './label/label.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MilestoneViewComponent } from './milestone-view/milestone-view.componen
     TasksComponent,
     InfoComponent,
     MilestoneViewComponent,
+    LabelComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

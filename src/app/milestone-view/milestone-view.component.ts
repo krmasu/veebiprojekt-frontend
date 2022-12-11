@@ -57,8 +57,6 @@ export class MilestoneViewComponent implements OnInit {
     this.projectId = Number(sessionStorage.getItem('projectId'));
     this.milestoneId = Number(sessionStorage.getItem('milestoneId'));
 
-    console.log(this.projectId);
-
     const json = sessionStorage.getItem('taskData')!;
     const taskData = JSON.parse(json);
     this.title = taskData.title;
@@ -151,7 +149,7 @@ export class MilestoneViewComponent implements OnInit {
           options
         )
         .subscribe((data) => {
-          console.log(data);
+          alert('Milestone updated');
         });
     } catch (e) {
       console.log(e);
@@ -197,6 +195,7 @@ export class MilestoneViewComponent implements OnInit {
           .delete<any>(`api/project/${this.projectId}/task/${taskId}`, options)
           .subscribe((data) => {
             this.milestoneTasks = data.tasks;
+            alert('Milestone deleted');
           });
       } catch (e) {
         console.log(e);

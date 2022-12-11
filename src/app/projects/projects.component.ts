@@ -42,6 +42,7 @@ export class ProjectsComponent implements OnInit {
           )
           .subscribe((data) => {
             this.showProjects = data;
+            alert('Project registered');
           });
       } catch (e) {
         console.log(e);
@@ -63,6 +64,7 @@ export class ProjectsComponent implements OnInit {
         };
         this.http.delete<any>('/api/project', options).subscribe((data) => {
           this.showProjects = data;
+          alert('Project succesfully deleted');
         });
       } catch (e) {
         console.log(e);

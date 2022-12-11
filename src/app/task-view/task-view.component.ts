@@ -37,7 +37,22 @@ export class TaskViewComponent implements OnInit {
     ['finished', '3'],
   ]);
 
+  labelInputMap: Map<string, string> = new Map<string, string>([
+    ['labelInput', ''],
+    ['labelColor', 'neutral'],
+  ]);
+
   statustOptions = ['not started', 'started', 'finished'];
+
+  colors = ['neutral', 'green', 'blue', 'yellow', 'black', 'red'];
+
+  labels = [
+    {
+      title: '',
+      colorCode: '',
+      id: '',
+    },
+  ];
 
   constructor(
     private http: HttpClient,
@@ -68,6 +83,79 @@ export class TaskViewComponent implements OnInit {
     this.milestoneId = taskData.milestoneId;
     this.activeStatus = this.statusesById.get(taskData.statusId.toString())!;
     this.getMilestones();
+    this.getLabel();
+  }
+
+  onLabelInput(event: any) {
+    this.labelInputMap.set(event.target.name, event.target.value);
+  }
+
+  removeLabel(labelId: any) {
+    try {
+      const options = {
+        headers: new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          ),
+      };
+      this.http
+        .delete<any>(`api/project/${this.projectId}/label/${labelId}`, options)
+        .subscribe((data) => {
+          this.labels = data.labels;
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  addLabel(): void {
+    if (this.labelInputMap.get('labelInput') != '') {
+      try {
+        const headers = new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          );
+        this.http
+          .post<any>(
+            `api/project/${this.projectId}/label`,
+            {
+              title: this.labelInputMap.get('labelInput'),
+              colorCode: this.labelInputMap.get('labelColor'),
+            },
+            { headers: headers }
+          )
+          .subscribe((data) => {
+            this.labels = data.labels;
+            alert('Label added');
+          });
+      } catch (e) {
+        console.log(e);
+        alert('Adding label failed');
+      }
+    } else {
+      alert("Title can't be empty");
+    }
+  }
+
+  getLabel(): void {
+    console.log(this.labelInputMap.get('labelInput'));
+    try {
+      const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${sessionStorage.getItem('authToken')}`);
+      this.http
+        .get<any>(`api/project/${this.projectId}/label`, { headers: headers })
+        .subscribe((data) => {
+          this.labels = data.labels;
+          console.log(this.labels);
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   onUpdateTask() {
@@ -102,7 +190,6 @@ export class TaskViewComponent implements OnInit {
 
   getMilestones(): void {
     if (this.projectId != -1) {
-      console.log(this.projectId);
       try {
         this.http
           .get<any>(`api/project/${this.projectId}/milestone`, {

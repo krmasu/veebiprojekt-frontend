@@ -157,9 +157,11 @@ export class TasksComponent implements OnInit {
           )
           .subscribe((data) => {
             this.projectTasks = data.tasks;
+            alert('Task added');
           });
       } catch (e) {
         console.log(e);
+        alert('Adding task failed');
       }
     }
   }

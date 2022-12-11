@@ -102,6 +102,7 @@ export class MilestonesComponent implements OnInit {
           )
           .subscribe((data) => {
             this.milestones = data.milestones;
+            alert('Milestone added');
           });
       } catch (e) {
         console.log(e);
