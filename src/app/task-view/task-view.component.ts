@@ -18,6 +18,11 @@ export class TaskViewComponent implements OnInit {
   projectId: Number = -1;
   userId: Number = -1;
 
+  milestoneSelectionIds: Map<string, any> = new Map<string, any>();
+  milestoneSelection: string[] = [];
+
+  activeMilestone = '';
+
   constructor(
     private http: HttpClient,
     private _router: Router,
@@ -30,6 +35,7 @@ export class TaskViewComponent implements OnInit {
       this.taskId = Number(params['taskId']);
       this.userId = Number(params['userId']);
     });
+
     const json = sessionStorage.getItem('taskData')!;
     const taskData = JSON.parse(json);
     this.title = taskData.title;
@@ -37,10 +43,11 @@ export class TaskViewComponent implements OnInit {
     this.deadline = `${String(taskData.deadline[0]).padStart(4, '0')}-${String(
       taskData.deadline[1]
     ).padStart(2, '0')}-${String(taskData.deadline[2]).padStart(2, '0')}`;
-    console.log(this.deadline);
+
     this.assignee = taskData.assignee;
     this.statusId = taskData.statusId;
     this.milestoneId = taskData.milestoneId;
+    this.getMilestones();
   }
 
   onUpdateTask() {
@@ -50,23 +57,16 @@ export class TaskViewComponent implements OnInit {
           .set('content-type', 'application/json')
           .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
       };
-      // private String title;
-      // private String description;
-      /// private LocalDate deadline;
-      // private Integer assigneeId;
-      // private Integer statusId;
-      /// private List<Integer> labelIds;
-      //private Integer milestoneId;
       this.http
         .patch<any>(
-          `api/project/${this.projectId}/${this.taskId}`,
+          `api/project/${this.projectId}/task/${this.taskId}`,
           {
             title: this.title,
             description: this.description,
             deadline: this.deadline,
             assigneeId: this.assignee,
             statusId: this.statusId,
-            milestoneId: this.milestoneId,
+            milestoneId: this.milestoneSelectionIds.get(this.activeMilestone),
           },
           options
         )
@@ -79,6 +79,33 @@ export class TaskViewComponent implements OnInit {
       );
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  getMilestones(): void {
+    if (this.projectId != -1) {
+      try {
+        this.http
+          .get<any>(`api/project/${this.projectId}/milestone`, {
+            headers: new HttpHeaders()
+              .set('content-type', 'application/json')
+              .set(
+                'Authorization',
+                `Bearer ${localStorage.getItem('authToken')}`
+              ),
+          })
+          .subscribe((data) => {
+            data.milestones.map((milestone: any) => {
+              this.milestoneSelectionIds.set(milestone.title, milestone.id);
+              this.milestoneSelection.push(milestone.title);
+              if (milestone.id == this.milestoneId) {
+                this.activeMilestone = milestone.title;
+              }
+            });
+          });
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 }

@@ -9,21 +9,23 @@
       <div>
         <textarea maxlength="255" rows="5" [(ngModel)]="description"></textarea>
       </div>
-      <label>Deadline</label>
+      <label>Start Date</label>
       <div>
-        <input [(ngModel)]="deadline" type="date" />
+        <input [(ngModel)]="startDate" type="date" />
       </div>
-      <select name="milestone" [(ngModel)]="activeMilestone">
-        <option *ngFor="let milestoneOption of milestoneSelection">
-          {{ milestoneOption }}
-        </option>
-      </select>
+      <label>End Date</label>
+
+      <div>
+        <input [(ngModel)]="endDate" type="date" />
+      </div>
       <button
         class="width-100 btn btn-sm background-signal-danger border-none cursor-pointer"
-        (click)="onUpdateTask()"
+        (click)="onUpdateMilestone()"
       >
         Save
       </button>
+
+      <app-tasks></app-tasks>
     </div>
   </div>
 </div>

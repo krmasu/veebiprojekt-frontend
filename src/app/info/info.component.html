@@ -1,0 +1,12 @@
+<input
+  (keyup)="onInput($event)"
+  [(ngModel)]="title"
+  placeholder="new title"
+  class=""
+/>
+<button
+  (click)="updateProject()"
+  class="width-50 btn btn-sm background-signal-danger text-black border-none cursor-pointer"
+>
+  Update project title
+</button>

@@ -1,0 +1,115 @@
+<div>
+  <h3>New milestone</h3>
+  <label>Milestone title</label>
+  <div>
+    <input name="title" (keyup)="onNewMilestoneInput($event)" />
+  </div>
+
+  <label>Description</label>
+  <div>
+    <textarea
+      name="description"
+      maxlength="255"
+      (keyup)="onNewMilestoneInput($event)"
+    ></textarea>
+  </div>
+  <label>Start date</label>
+  <div>
+    <input
+      name="startDate"
+      type="date"
+      (change)="onNewMilestoneInput($event)"
+      (keyup)="onNewMilestoneInput($event)"
+    />
+  </div>
+
+  <label>End date</label>
+  <div>
+    <input
+      name="endDate"
+      type="date"
+      (change)="onNewMilestoneInput($event)"
+      (keyup)="onNewMilestoneInput($event)"
+    />
+  </div>
+</div>
+<div>
+  <button (click)="addMilestone()">Add milestone</button>
+</div>
+<input
+  name="textInput"
+  placeholder="filter by {{ filteringData.get('filterBy') }}"
+  (keyup)="onFilteringInput($event)"
+/>
+<select class="my-16" name="filterBy" (change)="onFilteringInput($event)">
+  <option *ngFor="let filterOption of filteringOptions">
+    {{ filterOption }}
+  </option>
+</select>
+<table>
+  <tr>
+    <th>Id</th>
+    <th (click)="getSortedTasks('title')">Title</th>
+    <th>Description</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Delete</th>
+    <th>View</th>
+  </tr>
+  <tr *ngFor="let milestone of milestones">
+    <td>
+      {{ milestone.id }}
+    </td>
+    <td>
+      {{ milestone.title }}
+    </td>
+    <td>
+      {{ milestone.description }}
+    </td>
+    <td>
+      {{ milestone.startDate }}
+    </td>
+    <td>
+      {{ milestone.endDate }}
+    </td>
+    <td>
+      <button
+        class="width-100 btn btn-sm background-signal-error border-none cursor-pointer"
+        (click)="onDeleteMilestone(milestone.id)"
+      >
+        Delete
+      </button>
+    </td>
+    <td>
+      <button
+        class="width-100 btn btn-sm border-none cursor-pointer background-signal-danger"
+        (click)="
+          navigateToMilestoneView(
+            milestone.title,
+            milestone.description,
+            milestone.id,
+            milestone.startDate,
+            milestone.endDate
+          )
+        "
+      >
+        View
+      </button>
+    </td>
+  </tr>
+</table>
+<div class="d-flex gap-32">
+  <div
+    class="py-8 px-12 border-radius-16 background-gray-accent-5 text-neutral cursor-pointer"
+    *ngFor="let page of totalPages"
+    (click)="
+      getMilestones(
+        this.paginationSettings.get('sort'),
+        this.paginationSettings.get('size'),
+        page
+      )
+    "
+  >
+    {{ page }}
+  </div>
+</div>
