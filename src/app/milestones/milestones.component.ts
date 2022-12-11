@@ -112,6 +112,13 @@ export class MilestonesComponent implements OnInit {
     }
   }
 
+  formatted(date: any) {
+    if (date) {
+      return `${date[2]}/${date[1]}/${date[0]}`;
+    }
+    return '';
+  }
+
   getMilestones(
     sort = this.paginationSettings.get('sort'),
     size = this.paginationSettings.get('size'),
