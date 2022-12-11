@@ -20,6 +20,12 @@ export class TasksComponent implements OnInit {
 
   totalPages: number[] = [];
 
+  statusesById: Map<string, string> = new Map<string, string>([
+    ['1', 'not started'],
+    ['2', 'started'],
+    ['3', 'finished'],
+  ]);
+
   projectTasks = [
     {
       id: '',

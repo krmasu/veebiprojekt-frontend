@@ -13,11 +13,22 @@
       <div>
         <input [(ngModel)]="deadline" type="date" />
       </div>
-      <select name="milestone" [(ngModel)]="activeMilestone">
-        <option *ngFor="let milestoneOption of milestoneSelection">
-          {{ milestoneOption }}
-        </option>
-      </select>
+      <label>Milestones</label>
+      <div>
+        <select name="milestone" [(ngModel)]="activeMilestone">
+          <option *ngFor="let milestoneOption of milestoneSelection">
+            {{ milestoneOption }}
+          </option>
+        </select>
+      </div>
+      <label>Status</label>
+      <div>
+        <select name="status" [(ngModel)]="activeStatus">
+          <option *ngFor="let status of statustOptions">
+            {{ status }}
+          </option>
+        </select>
+      </div>
       <button
         class="width-100 btn btn-sm background-signal-danger border-none cursor-pointer"
         (click)="onUpdateTask()"

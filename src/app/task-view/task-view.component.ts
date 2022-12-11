@@ -18,10 +18,26 @@ export class TaskViewComponent implements OnInit {
   projectId: Number = -1;
   userId: Number = -1;
 
+  activeStatus = '';
+
   milestoneSelectionIds: Map<string, any> = new Map<string, any>();
   milestoneSelection: string[] = [];
 
   activeMilestone = '';
+
+  statusesById: Map<string, string> = new Map<string, string>([
+    ['1', 'not started'],
+    ['2', 'started'],
+    ['3', 'finished'],
+  ]);
+
+  idsByStatus: Map<string, string> = new Map<string, string>([
+    ['not started', '1'],
+    ['started', '2'],
+    ['finished', '3'],
+  ]);
+
+  statustOptions = ['not started', 'started', 'finished'];
 
   constructor(
     private http: HttpClient,
@@ -31,7 +47,7 @@ export class TaskViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectId = Number(sessionStorage.getItem('projectId'));
-    this.taskId = Number(sessionStorage.getItem('tasktId'));
+    this.taskId = Number(sessionStorage.getItem('taskId'));
     this.userId = Number(sessionStorage.getItem('userId'));
 
     const json = sessionStorage.getItem('taskData')!;
@@ -46,9 +62,11 @@ export class TaskViewComponent implements OnInit {
         taskData.deadline[2]
       ).padStart(2, '0')}`;
     }
+
     this.assignee = taskData.assignee;
     this.statusId = taskData.statusId;
     this.milestoneId = taskData.milestoneId;
+    this.activeStatus = this.statusesById.get(taskData.statusId.toString())!;
     this.getMilestones();
   }
 
@@ -57,10 +75,7 @@ export class TaskViewComponent implements OnInit {
       const options = {
         headers: new HttpHeaders()
           .set('content-type', 'application/json')
-          .set(
-            'Authorization',
-            `Bearer ${sessionStorage.getItem('authToken')}`
-          ),
+          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
       };
       this.http
         .patch<any>(
@@ -70,7 +85,7 @@ export class TaskViewComponent implements OnInit {
             description: this.description,
             deadline: this.deadline,
             assigneeId: this.assignee,
-            statusId: this.statusId,
+            statusId: this.idsByStatus.get(this.activeStatus),
             milestoneId: this.milestoneSelectionIds.get(this.activeMilestone),
           },
           options
@@ -80,9 +95,6 @@ export class TaskViewComponent implements OnInit {
         });
 
       this._router.navigateByUrl(`project-view`);
-
-      sessionStorage.setItem('userId', this.userId.toString());
-      sessionStorage.setItem('projectId', this.projectId.toString());
     } catch (e) {
       console.log(e);
     }
@@ -90,6 +102,7 @@ export class TaskViewComponent implements OnInit {
 
   getMilestones(): void {
     if (this.projectId != -1) {
+      console.log(this.projectId);
       try {
         this.http
           .get<any>(`api/project/${this.projectId}/milestone`, {
@@ -97,7 +110,7 @@ export class TaskViewComponent implements OnInit {
               .set('content-type', 'application/json')
               .set(
                 'Authorization',
-                `Bearer ${sessionStorage.getItem('authToken')}`
+                `Bearer ${localStorage.getItem('authToken')}`
               ),
           })
           .subscribe((data) => {
@@ -105,6 +118,7 @@ export class TaskViewComponent implements OnInit {
               this.milestoneSelectionIds.set(milestone.title, milestone.id);
               this.milestoneSelection.push(milestone.title);
               if (milestone.id == this.milestoneId) {
+                console.log(milestone.title);
                 this.activeMilestone = milestone.title;
               }
             });
