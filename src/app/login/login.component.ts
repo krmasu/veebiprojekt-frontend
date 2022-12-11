@@ -34,7 +34,7 @@ export class LoginComponent {
             password: this.inputData.get('password'),
           })
           .subscribe((data) => {
-            localStorage.setItem('authToken', data.authToken);
+            sessionStorage.setItem('authToken', data.authToken);
             this.navigateToHome(data.id);
           });
       } catch (e) {
@@ -44,7 +44,8 @@ export class LoginComponent {
   }
 
   navigateToHome(userId: Number) {
-    this._router.navigateByUrl(`index?userId=${userId}`);
+    sessionStorage.setItem('userId', userId.toString());
+    this._router.navigateByUrl(`index`);
   }
 
   navigateToRegister() {

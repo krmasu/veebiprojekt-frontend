@@ -53,11 +53,12 @@ export class MilestoneViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-      this.milestoneId = Number(params['milestoneId']);
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
+    this.projectId = Number(sessionStorage.getItem('projectId'));
+    this.milestoneId = Number(sessionStorage.getItem('milestoneId'));
+
+    console.log(this.projectId);
+
     const json = sessionStorage.getItem('taskData')!;
     const taskData = JSON.parse(json);
     this.title = taskData.title;
@@ -92,7 +93,7 @@ export class MilestoneViewComponent implements OnInit {
     try {
       const headers = new HttpHeaders()
         .set('content-type', 'application/json')
-        .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+        .set('Authorization', `Bearer ${sessionStorage.getItem('authToken')}`);
       this.http
         .get<any>(
           `/api/project/${this.projectId}/task/?size=${size}&page=${page}${
@@ -132,7 +133,10 @@ export class MilestoneViewComponent implements OnInit {
       const options = {
         headers: new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          ),
       };
       this.http
         .patch<any>(
@@ -173,9 +177,9 @@ export class MilestoneViewComponent implements OnInit {
     });
     sessionStorage.setItem('taskData', taskData);
 
-    this._router.navigateByUrl(
-      `task-view?userId=${this.userId}&projectId=${this.projectId}&taskId=${taskId}`
-    );
+    this._router.navigateByUrl(`task-view`);
+
+    sessionStorage.setItem('taskId', taskId.toString());
   }
 
   onDeleteTask(taskId: string) {
@@ -186,7 +190,7 @@ export class MilestoneViewComponent implements OnInit {
             .set('content-type', 'application/json')
             .set(
               'Authorization',
-              `Bearer ${localStorage.getItem('authToken')}`
+              `Bearer ${sessionStorage.getItem('authToken')}`
             ),
         };
         this.http

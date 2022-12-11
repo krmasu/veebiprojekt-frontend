@@ -55,10 +55,8 @@ export class TasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
+    this.projectId = Number(sessionStorage.getItem('projectId'));
     this.onGetTasks();
     this.getMilestones();
   }
@@ -106,7 +104,7 @@ export class TasksComponent implements OnInit {
     try {
       const headers = new HttpHeaders()
         .set('content-type', 'application/json')
-        .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+        .set('Authorization', `Bearer ${sessionStorage.getItem('authToken')}`);
       this.http
         .get<any>(
           `/api/project/${this.projectId}/task/?size=${size}&page=${page}${
@@ -135,7 +133,10 @@ export class TasksComponent implements OnInit {
       try {
         const headers = new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          );
         this.http
           .post<any>(
             `/api/project/${this.projectId}/task`,
@@ -166,7 +167,7 @@ export class TasksComponent implements OnInit {
               .set('content-type', 'application/json')
               .set(
                 'Authorization',
-                `Bearer ${localStorage.getItem('authToken')}`
+                `Bearer ${sessionStorage.getItem('authToken')}`
               ),
           })
           .subscribe((data) => {
@@ -189,7 +190,7 @@ export class TasksComponent implements OnInit {
             .set('content-type', 'application/json')
             .set(
               'Authorization',
-              `Bearer ${localStorage.getItem('authToken')}`
+              `Bearer ${sessionStorage.getItem('authToken')}`
             ),
         };
         this.http
@@ -222,8 +223,8 @@ export class TasksComponent implements OnInit {
     });
     sessionStorage.setItem('taskData', taskData);
 
-    this._router.navigateByUrl(
-      `task-view?userId=${this.userId}&projectId=${this.projectId}&taskId=${taskId}`
-    );
+    this._router.navigateByUrl(`task-view`);
+
+    sessionStorage.setItem('taskId', taskId.toString());
   }
 }

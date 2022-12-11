@@ -30,11 +30,9 @@ export class TaskViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-      this.taskId = Number(params['taskId']);
-      this.userId = Number(params['userId']);
-    });
+    this.projectId = Number(sessionStorage.getItem('projectId'));
+    this.taskId = Number(sessionStorage.getItem('tasktId'));
+    this.userId = Number(sessionStorage.getItem('userId'));
 
     const json = sessionStorage.getItem('taskData')!;
     const taskData = JSON.parse(json);
@@ -59,7 +57,10 @@ export class TaskViewComponent implements OnInit {
       const options = {
         headers: new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          ),
       };
       this.http
         .patch<any>(
@@ -78,9 +79,10 @@ export class TaskViewComponent implements OnInit {
           console.log(data);
         });
 
-      this._router.navigateByUrl(
-        `project-view?userId=${this.userId}&projectId=${this.projectId}`
-      );
+      this._router.navigateByUrl(`project-view`);
+
+      sessionStorage.setItem('userId', this.userId.toString());
+      sessionStorage.setItem('projectId', this.projectId.toString());
     } catch (e) {
       console.log(e);
     }
@@ -95,7 +97,7 @@ export class TaskViewComponent implements OnInit {
               .set('content-type', 'application/json')
               .set(
                 'Authorization',
-                `Bearer ${localStorage.getItem('authToken')}`
+                `Bearer ${sessionStorage.getItem('authToken')}`
               ),
           })
           .subscribe((data) => {
@@ -103,7 +105,6 @@ export class TaskViewComponent implements OnInit {
               this.milestoneSelectionIds.set(milestone.title, milestone.id);
               this.milestoneSelection.push(milestone.title);
               if (milestone.id == this.milestoneId) {
-                console.log(milestone.title);
                 this.activeMilestone = milestone.title;
               }
             });

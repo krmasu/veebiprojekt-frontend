@@ -18,21 +18,18 @@ export class IndexComponent implements OnInit {
   quote = 'Requesting quote...';
   quoteAuthor = 'Anoynymous';
 
-  constructor(
-    private http: HttpClient,
-    private _router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
     if (this.userId != -1) {
       try {
         const headers = new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          );
         this.http
           .post<any>(
             '/api/user',
