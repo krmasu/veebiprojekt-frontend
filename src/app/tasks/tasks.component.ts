@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -76,6 +75,13 @@ export class TasksComponent implements OnInit {
   getSortedTasks(sort: string) {
     this.setDirection();
     this.onGetTasks(sort);
+  }
+
+  formatted(date: any) {
+    if (date) {
+      return `${date[2]}/${date[1]}/${date[0]}`;
+    }
+    return '';
   }
 
   setDirection() {

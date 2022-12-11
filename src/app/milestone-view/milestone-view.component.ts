@@ -43,6 +43,13 @@ export class MilestoneViewComponent implements OnInit {
     ).padStart(2, '0')}-${String(taskData.endDate[2]).padStart(2, '0')}`;
   }
 
+  formatted(date: any) {
+    if (date) {
+      return `${date[2]}/${date[1]}/${date[0]}`;
+    }
+    return '';
+  }
+
   onUpdateMilestone() {
     try {
       const options = {
