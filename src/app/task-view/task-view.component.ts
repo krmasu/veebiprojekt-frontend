@@ -42,17 +42,34 @@ export class TaskViewComponent implements OnInit {
     ['labelColor', 'neutral'],
   ]);
 
-  statustOptions = ['not started', 'started', 'finished'];
+  labelIdMap: Map<string, string> = new Map<string, string>();
+  labelTitleMap: Map<string, string> = new Map<string, string>();
 
-  colors = ['neutral', 'green', 'blue', 'yellow', 'black', 'red'];
-
-  labels = [
+  taskLabels: any[] = [
     {
       title: '',
       colorCode: '',
       id: '',
     },
   ];
+
+  activeLabel = '';
+
+  statustOptions = ['not started', 'started', 'finished'];
+
+  colors = ['neutral', 'green', 'blue', 'yellow', 'black', 'red'];
+
+  projectLabels = [
+    {
+      title: '',
+      colorCode: '',
+      id: '',
+    },
+  ];
+
+  changeActiveLabel(event: any) {
+    this.activeLabel = event.target.value;
+  }
 
   constructor(
     private http: HttpClient,
@@ -77,12 +94,20 @@ export class TaskViewComponent implements OnInit {
         taskData.deadline[2]
       ).padStart(2, '0')}`;
     }
-
     this.assignee = taskData.assignee;
     this.statusId = taskData.statusId;
     this.milestoneId = taskData.milestoneId;
     this.activeStatus = this.statusesById.get(taskData.statusId.toString())!;
+
+    this.taskLabels = taskData.labels;
+
     this.getMilestones();
+    this.getLabel();
+  }
+
+  addLabel() {
+    let labelData = this.labelIdMap.get(this.activeLabel);
+    this.taskLabels.push(labelData);
   }
 
   onUpdateTask() {
@@ -90,7 +115,10 @@ export class TaskViewComponent implements OnInit {
       const options = {
         headers: new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          ),
       };
       this.http
         .patch<any>(
@@ -102,6 +130,7 @@ export class TaskViewComponent implements OnInit {
             assigneeId: this.assignee,
             statusId: this.idsByStatus.get(this.activeStatus),
             milestoneId: this.milestoneSelectionIds.get(this.activeMilestone),
+            labelIds: this.taskLabels.map((taskLabel) => taskLabel.id),
           },
           options
         )
@@ -124,7 +153,7 @@ export class TaskViewComponent implements OnInit {
               .set('content-type', 'application/json')
               .set(
                 'Authorization',
-                `Bearer ${localStorage.getItem('authToken')}`
+                `Bearer ${sessionStorage.getItem('authToken')}`
               ),
           })
           .subscribe((data) => {
@@ -145,27 +174,16 @@ export class TaskViewComponent implements OnInit {
   }
 
   removeLabel(labelId: any) {
-    try {
-      const options = {
-        headers: new HttpHeaders()
-          .set('content-type', 'application/json')
-          .set(
-            'Authorization',
-            `Bearer ${sessionStorage.getItem('authToken')}`
-          ),
-      };
-      this.http
-        .delete<any>(`api/project/${this.projectId}/label/${labelId}`, options)
-        .subscribe((data) => {
-          this.labels = data.labels;
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    let newTaskLabels: any[] = [];
+    this.taskLabels.map((taskLabel) => {
+      if (labelId != taskLabel.id) {
+        newTaskLabels.push(taskLabel);
+      }
+    });
+    this.taskLabels = newTaskLabels;
   }
 
   getLabel(): void {
-    console.log(this.labelInputMap.get('labelInput'));
     try {
       const headers = new HttpHeaders()
         .set('content-type', 'application/json')
@@ -173,8 +191,13 @@ export class TaskViewComponent implements OnInit {
       this.http
         .get<any>(`api/project/${this.projectId}/label`, { headers: headers })
         .subscribe((data) => {
-          this.labels = data.labels;
-          console.log(this.labels);
+          data.labels.map((label: any) => {
+            this.labelIdMap.set(label.title, label);
+            this.labelTitleMap.set(label.id, label);
+          });
+          this.projectLabels = data.labels;
+          this.activeLabel =
+            this.projectLabels.length != 0 ? this.projectLabels[0].title : '';
         });
     } catch (e) {
       console.log(e);
