@@ -17,9 +17,7 @@ export class InfoComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-    });
+    this.projectId = Number(sessionStorage.getItem('projectId'));
   }
 
   onInput(event: any) {
@@ -31,7 +29,10 @@ export class InfoComponent implements OnInit {
       const options = {
         headers: new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`),
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          ),
       };
       this.http
         .patch<any>(

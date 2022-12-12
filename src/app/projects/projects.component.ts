@@ -18,9 +18,7 @@ export class ProjectsComponent implements OnInit {
   userId = -1;
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
   }
 
   onInput(event: any) {
@@ -32,7 +30,10 @@ export class ProjectsComponent implements OnInit {
       try {
         const headers = new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          );
         this.http
           .post<any>(
             '/api/project',
@@ -41,6 +42,7 @@ export class ProjectsComponent implements OnInit {
           )
           .subscribe((data) => {
             this.showProjects = data;
+            alert('Project registered');
           });
       } catch (e) {
         console.log(e);
@@ -56,12 +58,13 @@ export class ProjectsComponent implements OnInit {
             .set('content-type', 'application/json')
             .set(
               'Authorization',
-              `Bearer ${localStorage.getItem('authToken')}`
+              `Bearer ${sessionStorage.getItem('authToken')}`
             ),
           body: { ownerId: this.userId, projectId: projectId },
         };
         this.http.delete<any>('/api/project', options).subscribe((data) => {
           this.showProjects = data;
+          alert('Project succesfully deleted');
         });
       } catch (e) {
         console.log(e);
@@ -78,8 +81,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   navigateToProjectView(projectId: Number) {
-    this._router.navigateByUrl(
-      `project-view?userId=${this.userId}&projectId=${projectId}`
-    );
+    this._router.navigateByUrl(`project-view`);
+    sessionStorage.setItem('projectId', projectId.toString());
   }
 }

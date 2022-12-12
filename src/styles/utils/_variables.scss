@@ -1,6 +1,10 @@
 $black: #000000;
 $light-black: #333;
 $neutral: #ffffff;
+$green: green;
+$blue: blue;
+$yellow: yellow;
+$red: red;
 
 $brand-primary-light-accent: #5b768b;
 $brand-primary-default-accent: #204969;
@@ -29,23 +33,27 @@ $disabled-gray: #e7e3e3;
 //
 
 $all-colors: (
-black: $black,
-neutral: $neutral,
-gray-accent-1: $gray-accent-1,
-gray-accent-2: $gray-accent-2,
-gray-accent-3: $gray-accent-3,
-gray-accent-4: $gray-accent-4,
-gray-accent-5: $gray-accent-5,
-disabled-gray: $disabled-gray,
-signal-error: $signal-error,
-signal-danger: $signal-danger,
-signal-success: $signal-success,
-brand-primary-light-accent: $brand-primary-light-accent,
-brand-primary-default-accent: $brand-primary-default-accent,
-brand-primary-dark-accent: $brand-primary-dark-accent,
-brand-secondary-light-accent: $brand-secondary-light-accent,
-brand-secondary-default-accent: $brand-secondary-default-accent,
-brand-secondary-dark-accent: $brand-secondary-dark-accent,
+  black: $black,
+  green: $green,
+  blue: $blue,
+  yellow: $yellow,
+  red: $red,
+  neutral: $neutral,
+  gray-accent-1: $gray-accent-1,
+  gray-accent-2: $gray-accent-2,
+  gray-accent-3: $gray-accent-3,
+  gray-accent-4: $gray-accent-4,
+  gray-accent-5: $gray-accent-5,
+  disabled-gray: $disabled-gray,
+  signal-error: $signal-error,
+  signal-danger: $signal-danger,
+  signal-success: $signal-success,
+  brand-primary-light-accent: $brand-primary-light-accent,
+  brand-primary-default-accent: $brand-primary-default-accent,
+  brand-primary-dark-accent: $brand-primary-dark-accent,
+  brand-secondary-light-accent: $brand-secondary-light-accent,
+  brand-secondary-default-accent: $brand-secondary-default-accent,
+  brand-secondary-dark-accent: $brand-secondary-dark-accent,
 );
 
 // button color variables
@@ -53,16 +61,16 @@ brand-secondary-dark-accent: $brand-secondary-dark-accent,
 $button-colors: (
   primary: (
     // 1 --> text
-  $neutral,
+    $neutral,
     // 2 --> bg
-  $black,
+    $black,
     // 3 --> bg hover
-  $black,
+    $black,
     // 4 --> bg focus
-  $black,
+    $black,
     // 5 --> bg active
-  $black,
-),
+    $black,
+  ),
 );
 
 // button shadows
@@ -74,14 +82,14 @@ $primary-button-active-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 $button-shadows: (
   primary: (
     // 1 --> reg
-  $primary-button-reg-shadow,
+    $primary-button-reg-shadow,
     // 2 --> hover
-  $primary-button-hover-shadow,
+    $primary-button-hover-shadow,
     // 3 --> focus
-  $primary-button-focus-shadow,
+    $primary-button-focus-shadow,
     // 4 --> active
-  $primary-button-active-shadow,
-),
+    $primary-button-active-shadow,
+  ),
 );
 
 // shadows
@@ -93,11 +101,11 @@ $shadow-lg: 0 12px 35px 4px rgba(178, 175, 175, 0.35);
 $shadow-xl: 0 18px 42px 4px rgba(178, 175, 175, 0.4);
 
 $all-shadows: (
-shadow-xs: $shadow-xs,
-shadow-sm: $shadow-sm,
-shadow-reg: $shadow-reg,
-shadow-lg: $shadow-lg,
-shadow-xl: $shadow-xl,
+  shadow-xs: $shadow-xs,
+  shadow-sm: $shadow-sm,
+  shadow-reg: $shadow-reg,
+  shadow-lg: $shadow-lg,
+  shadow-xl: $shadow-xl,
 );
 
 $box-shadow-xs: 0px 2px 10px rgba(212, 215, 227, 0.2);
@@ -109,56 +117,56 @@ $box-shadow-lg: 0px 16px 25px rgba(212, 215, 227, 0.5);
 
 $spacer: 1rem !default;
 $spacers: (
-0: 0,
-2: (
-$spacer * 0.125,
-),
-4: (
-$spacer * 0.25,
-),
-8: (
-$spacer * 0.5,
-),
-10: (
-$spacer * (10 / 16),
-),
-12: (
-$spacer * 0.75,
-),
-16: (
-$spacer,
-),
-24: (
-$spacer * 1.5,
-),
-32: (
-$spacer * 2,
-),
-48: (
-$spacer * 3,
-),
-64: (
-$spacer * 4,
-),
-96: (
-$spacer * 6,
-),
-128: (
-$spacer * 8,
-),
-256: (
-$spacer * 16,
-),
-384: (
-$spacer * 24,
-),
-512: (
-$spacer * 32,
-),
-auto: auto,
+  0: 0,
+  2: (
+    $spacer * 0.125,
+  ),
+  4: (
+    $spacer * 0.25,
+  ),
+  8: (
+    $spacer * 0.5,
+  ),
+  10: (
+    $spacer * (10 / 16),
+  ),
+  12: (
+    $spacer * 0.75,
+  ),
+  16: (
+    $spacer,
+  ),
+  24: (
+    $spacer * 1.5,
+  ),
+  32: (
+    $spacer * 2,
+  ),
+  48: (
+    $spacer * 3,
+  ),
+  64: (
+    $spacer * 4,
+  ),
+  96: (
+    $spacer * 6,
+  ),
+  128: (
+    $spacer * 8,
+  ),
+  256: (
+    $spacer * 16,
+  ),
+  384: (
+    $spacer * 24,
+  ),
+  512: (
+    $spacer * 32,
+  ),
+  auto: auto,
 );
 
-$font-family-sans-serif: 'Circular';
+$font-family-sans-serif: "Circular";
 
 $font-size-base: 1rem !default;
 
@@ -247,17 +255,17 @@ $global-transition: all 0.2s ease-out;
 
 $opacity: 1 !default;
 $opacities: (
-0: 0,
-10: 0.1,
-20: 0.2,
-30: 0.3,
-40: 0.4,
-50: 0.5,
-60: 0.6,
-70: 0.7,
-80: 0.8,
-90: 0.9,
-100: 1,
+  0: 0,
+  10: 0.1,
+  20: 0.2,
+  30: 0.3,
+  40: 0.4,
+  50: 0.5,
+  60: 0.6,
+  70: 0.7,
+  80: 0.8,
+  90: 0.9,
+  100: 1,
 );
 
 //
@@ -276,12 +284,12 @@ $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1400px;
 
 $breakpoints: (
-xs: $breakpoint-xs,
-sm: $breakpoint-sm,
-md: $breakpoint-md,
-lg: $breakpoint-lg,
-xl: $breakpoint-xl,
-xxl: $breakpoint-xxl,
+  xs: $breakpoint-xs,
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  xxl: $breakpoint-xxl,
 );
 
 //
@@ -289,41 +297,41 @@ xxl: $breakpoint-xxl,
 //
 
 $alignments: (
-'center',
-'space-between',
-'space-around',
-'space-evenly',
-'flex-start',
-'flex-end',
-'baseline',
-'stretch',
-'auto'
+  "center",
+  "space-between",
+  "space-around",
+  "space-evenly",
+  "flex-start",
+  "flex-end",
+  "baseline",
+  "stretch",
+  "auto"
 );
-$textAlignments: ('left', 'right', 'center', 'revert', 'justify');
+$textAlignments: ("left", "right", "center", "revert", "justify");
 
 //
 //
 //
 
 $displays: (
-'block',
-'inline-block',
-'inline',
-'grid',
-'table',
-'table-row',
-'table-cell',
-'flex',
-'inline-flex',
-'none'
+  "block",
+  "inline-block",
+  "inline",
+  "grid",
+  "table",
+  "table-row",
+  "table-cell",
+  "flex",
+  "inline-flex",
+  "none"
 );
 
 //
 //
 //
 
-$flexDirections: ('row', 'column', 'row-reverse', 'column-reverse');
-$flexWraps: ('wrap', 'nowrap', 'wrap-reverse');
+$flexDirections: ("row", "column", "row-reverse", "column-reverse");
+$flexWraps: ("wrap", "nowrap", "wrap-reverse");
 $flexSizes: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 //
@@ -336,7 +344,17 @@ $layers: (-1, 0, 1, 2, 3, 4, 5);
 //
 //
 
-$cursors: (pointer, help, wait, crosshair, not-allowed, zoom-in, zoom-out, grab, auto);
+$cursors: (
+  pointer,
+  help,
+  wait,
+  crosshair,
+  not-allowed,
+  zoom-in,
+  zoom-out,
+  grab,
+  auto
+);
 
 //
 //
@@ -349,19 +367,19 @@ $fontWeight: (100, 200, 300, 400, 500, 600, 700, 800, 900);
 //
 
 $percents: (
-0: 0%,
-8: 8.33333333%,
-17: 16.66666667%,
-25: 25%,
-33: 33.33333333%,
-42: 41.66666667%,
-50: 50%,
-58: 58.33333333%,
-67: 66.66666667%,
-75: 75%,
-83: 83.33333333%,
-92: 91.66666667%,
-100: 100%,
+  0: 0%,
+  8: 8.33333333%,
+  17: 16.66666667%,
+  25: 25%,
+  33: 33.33333333%,
+  42: 41.66666667%,
+  50: 50%,
+  58: 58.33333333%,
+  67: 66.66666667%,
+  75: 75%,
+  83: 83.33333333%,
+  92: 91.66666667%,
+  100: 100%,
 );
 
 //

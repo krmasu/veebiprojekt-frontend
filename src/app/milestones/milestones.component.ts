@@ -13,7 +13,7 @@ export class MilestonesComponent implements OnInit {
   totalPages: number[] = [];
   headers = new HttpHeaders()
     .set('content-type', 'application/json')
-    .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+    .set('Authorization', `Bearer ${sessionStorage.getItem('authToken')}`);
 
   newMilestoneData: Map<string, string> = new Map<string, string>([
     ['title', ''],
@@ -46,17 +46,11 @@ export class MilestonesComponent implements OnInit {
     ['page', 0],
   ]);
 
-  constructor(
-    private http: HttpClient,
-    private _router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private http: HttpClient, private _router: Router) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
+    this.projectId = Number(sessionStorage.getItem('projectId'));
 
     this.getMilestones();
   }
@@ -90,7 +84,10 @@ export class MilestonesComponent implements OnInit {
       try {
         const headers = new HttpHeaders()
           .set('content-type', 'application/json')
-          .set('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+          .set(
+            'Authorization',
+            `Bearer ${sessionStorage.getItem('authToken')}`
+          );
         this.http
           .post<any>(
             `/api/project/${this.projectId}/milestone`,
@@ -105,6 +102,7 @@ export class MilestonesComponent implements OnInit {
           )
           .subscribe((data) => {
             this.milestones = data.milestones;
+            alert('Milestone added');
           });
       } catch (e) {
         console.log(e);
@@ -165,7 +163,7 @@ export class MilestonesComponent implements OnInit {
             .set('content-type', 'application/json')
             .set(
               'Authorization',
-              `Bearer ${localStorage.getItem('authToken')}`
+              `Bearer ${sessionStorage.getItem('authToken')}`
             ),
         };
         this.http
@@ -198,8 +196,8 @@ export class MilestonesComponent implements OnInit {
     });
     sessionStorage.setItem('taskData', taskData);
 
-    this._router.navigateByUrl(
-      `milestone-view?userId=${this.userId}&projectId=${this.projectId}&milestoneId=${milestoneId}`
-    );
+    this._router.navigateByUrl(`milestone-view`);
+
+    sessionStorage.setItem('milestoneId', milestoneId.toString());
   }
 }

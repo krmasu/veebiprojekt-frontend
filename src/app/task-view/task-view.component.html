@@ -1,25 +1,83 @@
 <div class="container pt-128">
   <div class="row">
     <div class="col-12">
-      <label>Title</label>
-      <div>
-        <input [(ngModel)]="title" />
+      <div class="d-flex gap-16">
+        <div *ngFor="let label of labels">
+          <div
+            class="background-{{
+              label.colorCode
+            }} border-radius-16 text-black px-16 pt-16 pb-2"
+          >
+            {{ label.title }}
+            <p
+              class="m-0 mb-16 body-xs underline cursor-pointer"
+              (click)="removeLabel(label.id)"
+            >
+              remove
+            </p>
+          </div>
+        </div>
       </div>
-      <label>Description</label>
-      <div>
-        <textarea maxlength="255" rows="5" [(ngModel)]="description"></textarea>
+      <div class="mt-16">
+        <label>Title</label>
+        <div>
+          <input [(ngModel)]="title" />
+        </div>
       </div>
-      <label>Deadline</label>
-      <div>
-        <input [(ngModel)]="deadline" type="date" />
+      <div class="mt-16">
+        <label>Description</label>
+        <div>
+          <textarea
+            maxlength="255"
+            rows="5"
+            [(ngModel)]="description"
+          ></textarea>
+        </div>
       </div>
-      <select name="milestone" [(ngModel)]="activeMilestone">
-        <option *ngFor="let milestoneOption of milestoneSelection">
-          {{ milestoneOption }}
-        </option>
-      </select>
+      <div class="mt-16">
+        <label>Deadline</label>
+        <div>
+          <input [(ngModel)]="deadline" type="date" />
+        </div>
+      </div>
+      <div class="mt-16">
+        <label>Milestones</label>
+        <div>
+          <select name="milestone" [(ngModel)]="activeMilestone">
+            <option *ngFor="let milestoneOption of milestoneSelection">
+              {{ milestoneOption }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-16">
+        <label>Status</label>
+        <div>
+          <select name="status" [(ngModel)]="activeStatus">
+            <option *ngFor="let status of statustOptions">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-16">
+        <label>Label</label>
+        <div>
+          <input
+            name="labelInput"
+            (keyup)="onLabelInput($event)"
+            placeholder="label"
+          />
+          <select name="labelColor" (click)="onLabelInput($event)">
+            <option *ngFor="let color of colors">
+              {{ color }}
+            </option>
+          </select>
+          <button (click)="addLabel()">Add</button>
+        </div>
+      </div>
       <button
-        class="width-100 btn btn-sm background-signal-danger border-none cursor-pointer"
+        class="mt-16 width-100 btn btn-sm background-signal-danger border-none cursor-pointer"
         (click)="onUpdateTask()"
       >
         Save

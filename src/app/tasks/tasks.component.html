@@ -52,7 +52,7 @@
     <th>Description</th>
     <th>Deadline</th>
     <th (click)="getSortedTasks('milestone')">milestoneId</th>
-    <th (click)="getSortedTasks('status')">statusId</th>
+    <th (click)="getSortedTasks('status')">status</th>
     <th (click)="getSortedTasks('assignee')">assignee</th>
     <th>Delete</th>
     <th>Edit</th>
@@ -74,7 +74,7 @@
       {{ task.milestoneId }}
     </td>
     <td>
-      {{ task.statusId }}
+      {{ statusesById.get(task.statusId.toString()) }}
     </td>
     <td>
       {{ task.assignee }}

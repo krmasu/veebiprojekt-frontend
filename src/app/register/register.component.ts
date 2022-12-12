@@ -37,9 +37,11 @@ export class RegisterComponent implements OnInit {
           })
           .subscribe((data) => {
             this.registrationSuccess = true;
+            alert('Registration successful');
           });
       } catch (e) {
         console.log(e);
+        alert('Registration failed');
       }
     }
   }

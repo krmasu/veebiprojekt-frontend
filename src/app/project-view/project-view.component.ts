@@ -19,10 +19,8 @@ export class ProjectViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.projectId = Number(params['projectId']);
-      this.userId = Number(params['userId']);
-    });
+    this.userId = Number(sessionStorage.getItem('userId'));
+    this.projectId = Number(sessionStorage.getItem('projectId'));
   }
 
   onUpdateTitle(eventData: { newTitle: string }) {
