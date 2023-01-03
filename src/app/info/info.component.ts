@@ -101,6 +101,7 @@ export class InfoComponent implements OnInit {
   }
 
   removeLabel(labelId: any) {
+    console.log(labelId);
     try {
       const options = {
         headers: new HttpHeaders()

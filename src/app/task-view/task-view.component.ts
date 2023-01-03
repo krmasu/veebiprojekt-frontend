@@ -161,7 +161,6 @@ export class TaskViewComponent implements OnInit {
               this.milestoneSelectionIds.set(milestone.title, milestone.id);
               this.milestoneSelection.push(milestone.title);
               if (milestone.id == this.milestoneId) {
-                console.log(milestone.title);
                 this.activeMilestone = milestone.title;
               }
             });
