@@ -125,6 +125,7 @@ export class TasksComponent implements OnInit {
           { headers: headers }
         )
         .subscribe((data) => {
+          console.log(data);
           this.totalPages = [...Array(data.totalPages).keys()];
           this.projectTasks = data.tasks;
         });
@@ -219,7 +220,8 @@ export class TasksComponent implements OnInit {
     deadline: String,
     milestoneId: String,
     statusId: String,
-    assignee: String
+    assignee: String,
+    labels: any[]
   ) {
     const taskData = JSON.stringify({
       title: title,
@@ -228,6 +230,7 @@ export class TasksComponent implements OnInit {
       milestoneId: milestoneId,
       statusId: statusId,
       assignee: assignee,
+      labels: labels,
     });
     sessionStorage.setItem('taskData', taskData);
 

@@ -51,9 +51,7 @@
     <th (click)="getSortedTasks('title')">Title</th>
     <th>Description</th>
     <th>Deadline</th>
-    <th (click)="getSortedTasks('milestone')">milestoneId</th>
     <th (click)="getSortedTasks('status')">status</th>
-    <th (click)="getSortedTasks('assignee')">assignee</th>
     <th>Delete</th>
     <th>Edit</th>
   </tr>
@@ -71,13 +69,7 @@
       {{ formatted(task.deadline) }}
     </td>
     <td>
-      {{ task.milestoneId }}
-    </td>
-    <td>
       {{ statusesById.get(task.statusId.toString()) }}
-    </td>
-    <td>
-      {{ task.assignee }}
     </td>
     <td>
       <button
@@ -98,7 +90,8 @@
             task.deadline,
             task.milestoneId,
             task.statusId,
-            task.assignee
+            task.assignee,
+            task.labels
           )
         "
       >

@@ -2,19 +2,21 @@
   <div class="row">
     <div class="col-12">
       <div class="d-flex gap-16">
-        <div *ngFor="let label of labels">
-          <div
-            class="background-{{
-              label.colorCode
-            }} border-radius-16 text-black px-16 pt-16 pb-2"
-          >
-            {{ label.title }}
-            <p
-              class="m-0 mb-16 body-xs underline cursor-pointer"
-              (click)="removeLabel(label.id)"
+        <div *ngFor="let label of taskLabels">
+          <div *ngIf="label.title != ''">
+            <div
+              class="background-{{
+                label.colorCode
+              }} border-radius-16 text-black px-16 pt-16 pb-2"
             >
-              remove
-            </p>
+              {{ label.title }}
+              <p
+                class="m-0 mb-16 body-xs underline cursor-pointer"
+                (click)="removeLabel(label.id)"
+              >
+                remove
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -61,19 +63,14 @@
         </div>
       </div>
       <div class="mt-16">
-        <label>Label</label>
-        <div>
-          <input
-            name="labelInput"
-            (keyup)="onLabelInput($event)"
-            placeholder="label"
-          />
-          <select name="labelColor" (click)="onLabelInput($event)">
-            <option *ngFor="let color of colors">
-              {{ color }}
+        <label>Labels</label>
+        <div class="d-flex">
+          <select name="label" (change)="changeActiveLabel($event)">
+            <option *ngFor="let label of projectLabels">
+              {{ label.title }}
             </option>
           </select>
-          <button (click)="addLabel()">Add</button>
+          <button (click)="addLabel()">Add label</button>
         </div>
       </div>
       <button
