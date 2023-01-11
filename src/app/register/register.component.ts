@@ -38,12 +38,34 @@ export class RegisterComponent implements OnInit {
           .subscribe((data) => {
             this.registrationSuccess = true;
             alert('Registration successful');
+            this.onLogin();
           });
       } catch (e) {
         console.log(e);
         alert('Registration failed');
       }
     }
+  }
+
+  onLogin() {
+    try {
+      this.http
+        .post<any>('/api/public/login', {
+          username: this.inputData.get('username'),
+          password: this.inputData.get('password'),
+        })
+        .subscribe((data) => {
+          sessionStorage.setItem('authToken', data.authToken);
+          this.navigateToHome(data.id);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  navigateToHome(userId: Number) {
+    sessionStorage.setItem('userId', userId.toString());
+    this._router.navigateByUrl(`index`);
   }
 
   navigateToLogin() {
