@@ -33,11 +33,29 @@ export class InfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectId = Number(sessionStorage.getItem('projectId'));
+    this.getProject();
     this.getLabel();
   }
 
   onInput(event: any) {
     this.newTitle = event.target.value;
+  }
+
+  getProject() {
+    try {
+      const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${sessionStorage.getItem('authToken')}`);
+
+      this.http
+        .get<any>(`/api/project/${this.projectId}`, { headers: headers })
+        .subscribe((data) => {
+          this.newTitle = data.title;
+          this.newTitleCreated.emit({ newTitle: data.title });
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   updateProject() {

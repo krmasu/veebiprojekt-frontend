@@ -31,13 +31,7 @@ export class IndexComponent implements OnInit {
             `Bearer ${sessionStorage.getItem('authToken')}`
           );
         this.http
-          .post<any>(
-            '/api/user',
-            {
-              id: this.userId,
-            },
-            { headers: headers }
-          )
+          .get<any>(`/api/user/${this.userId}`, { headers: headers })
           .subscribe((data) => {
             this.username = data.username;
             this.email = data.email;

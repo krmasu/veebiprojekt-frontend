@@ -71,7 +71,6 @@ export class MilestoneViewComponent implements OnInit {
       taskData.endDate[1]
     ).padStart(2, '0')}-${String(taskData.endDate[2]).padStart(2, '0')}`;
     this.onGetTasks();
-    console.log(this.milestoneId);
   }
 
   getSortedTasks(sort: string) {
@@ -103,6 +102,7 @@ export class MilestoneViewComponent implements OnInit {
         .subscribe((data) => {
           this.totalPages = [...Array(data.totalPages).keys()];
           this.milestoneTasks = data.tasks;
+          console.log(data.tasks);
         });
     } catch (e) {
       console.log(e);
